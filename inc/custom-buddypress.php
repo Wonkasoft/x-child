@@ -77,10 +77,13 @@ function filter_bp_nav_menu_items( $items ) {
     if ( $item->css_id === 'friends' ) :
       unset($items[$key]);
     endif;
-    if ( $item->name === 'Profile') :
-      $item->name = __( "Edit Profile", '__x__' );
-      $item->link = _x( $user_domain . "profile/edit", '__x__' );
-    endif;
+    // if ( $item->css_id === 'notifications' ) :
+    //   unset($items[$key]);
+    // endif;
+    // if ( $item->name === 'Profile') :
+    //   $item->name = __( "Edit Profile", '__x__' );
+    //   $item->link = _x( $user_domain . "profile/edit", '__x__' );
+    // endif;
     if ( $item->name === 'Home' ) :
       $item->name = _x( "Profile", '__x__' );
       $item->link = _x( "$user_domain", '__x__' );
@@ -93,6 +96,13 @@ function filter_bp_nav_menu_items( $items ) {
     $newitem->name =  'Create a Group';
     $newitem->parent = 'groups';
   $items[] = $newitem;
+   $newitem1 = new stdClass();
+  $newitem1->class = array( 'menu-child' );
+    $newitem1->css_id =  'edit-profile';
+    $newitem1->link =  _x( $user_domain . "profile/edit", '__x__' );
+    $newitem1->name =  __( "Edit Profile", '__x__' );
+    $newitem1->parent = 'xprofile';
+  $items[] = $newitem1;
   $newitem2 = new stdClass();
   $newitem2->class = array( 'menu-child' );
     $newitem2->css_id =  'avatar-change';
@@ -111,23 +121,26 @@ function filter_bp_nav_menu_items( $items ) {
   $newitem4->class = array( 'menu-parent' );
     $newitem4->css_id =  'rsc-videos';
     $newitem4->link =  get_post_type_archive_link( 'rsc_videos' );
-    $newitem4->name =  __( "Videos", '__x__' );
+    $newitem4->name =  __( "Rockstar TV", '__x__' );
     $newitem4->parent = '0';
+    $items[] = $newitem4;
   $newitem5 = new stdClass();
   $newitem5->class = array( 'menu-parent' );
     $newitem5->css_id =  'rn-rooms';
     $newitem5->link =  _x( "/rsc-vroom/", '__x__' );
     $newitem5->name =  __( "VN Rooms", '__x__' );
     $newitem5->parent = '0';
+    $items[] = $newitem5;
   $newitem6 = new stdClass();
   $newitem6->class = array( 'menu-parent' );
     $newitem6->css_id =  'member-directory';
     $newitem6->link =  _x( bp_get_members_directory_permalink(), '__x__' );
     $newitem6->name =  __( "Directory", '__x__' );
     $newitem6->parent = '0';
+    $items[] = $newitem6;
+    
   $items = array_unique( $items, SORT_REGULAR );
-  array_splice( $items, 23, 0, array($newitem4, $newitem5, $newitem6 ) );
-
+  //array_splice( $items, 23, 0, array($newitem4, $newitem5, $newitem6 ) );
   return $items;
 }
 // add the filter 
@@ -250,7 +263,9 @@ function wonka_bp_nav_menu( $args = array() ) {
    * @param array $items Array of nav menu items.
    * @param array $args  Array of arguments for the menu.
    */
-  $items = apply_filters( 'bp_nav_menu_items', $items, $args );
+  //$items = apply_filters( 'bp_nav_menu_items', $items, $args );
+
+  $items = apply_filters( 'wonka_nav_menu_items', $items, $args );
 
   // Build the output.
   $wrap_class  = $args->menu_class ? $args->menu_class : '';
@@ -278,6 +293,72 @@ function wonka_bp_nav_menu( $args = array() ) {
     return $nav_menu;
   }
 }
+
+function global_menu($menus, $args){
+  $homeUrl = home_url();
+  $user_domain = bp_loggedin_user_domain();
+
+  $menus = '<li id="front-personal-li" class="menu-item menu-item-buddypress-navigation menu-item-has-children"><a href="'.$user_domain .'"><span>Profile</span></a></li>
+<li id="activity-personal-li" class="menu-item menu-item-buddypress-navigation menu-item-has-children"><a href="'.$user_domain .'activity"><span>Activity</span></a>
+<ul class="sub-menu">
+  <li id="just-me-personal-li" class="menu-item menu-item-buddypress-navigation menu-item-has-children"><a href="'.$user_domain .'activity"><span>Personal</span></a></li>
+  <li id="activity-mentions-personal-li" class="menu-item menu-item-buddypress-navigation menu-item-has-children"><a href="'.$user_domain .'activity/mentions"><span>Mentions</span></a></li>
+  <li id="activity-following-personal-li" class="menu-item menu-item-buddypress-navigation menu-item-has-children"><a href="'.$user_domain .'activity/following/"><span>Following</span></a></li>
+  <li id="activity-favs-personal-li" class="menu-item menu-item-buddypress-navigation menu-item-has-children"><a href="'.$user_domain .'activity/favorites/"><span>Favorites</span></a></li>
+  <li id="activity-friends-personal-li" class="menu-item menu-item-buddypress-navigation menu-item-has-children"><a href="'.$user_domain .'activity/friends/"><span>Friends</span></a>
+  <ul class="sub-menu">
+    <li id="friends-my-friends-personal-li" class="menu-item menu-item-buddypress-navigation menu-item-has-children"><a href="'.$user_domain .'activity/friends/"><span>Friendships</span></a></li>
+    <li id="requests-personal-li" class="menu-item menu-item-buddypress-navigation menu-item-has-children"><a href="'.$user_domain .'friends/requests/"><span>Requests</span></a></li>
+  </ul>
+</li>
+  <li id="activity-groups-personal-li" class="menu-item menu-item-buddypress-navigation menu-item-has-children"><a href="'.$user_domain .'activity/groups/"><span>Groups</span></a></li>
+  <li id="members-followers-personal-li" class="menu-item menu-item-buddypress-navigation menu-item-has-children"><a href="'.$user_domain .'followers/"><span>Followers</span></a></li>
+</ul>
+</li>
+<li id="notifications-personal-li" class="menu-item menu-item-buddypress-navigation menu-item-has-children"><a href="'.$user_domain .'notifications/"><span>Notifications <span class="count">4</span></span></a>
+<ul class="sub-menu">
+  <li id="notifications-my-notifications-personal-li" class="menu-item menu-item-buddypress-navigation menu-item-has-children"><a href="'.$user_domain .'notifications/"><span>Unread</span></a></li>
+  <li id="read-personal-li" class="menu-item menu-item-buddypress-navigation menu-item-has-children"><a href="'.$user_domain .'notifications/read/"><span>Read</span></a></li>
+</ul>
+</li>
+<li id="messages-personal-li" class="menu-item menu-item-buddypress-navigation menu-item-has-children"><a href="'.$user_domain .'messages/"><span>Messages <span class="no-count">0</span></span></a>
+<ul class="sub-menu">
+  <li id="inbox-personal-li" class="menu-item menu-item-buddypress-navigation menu-item-has-children"><a href="'.$user_domain .'messages/"><span>Inbox</span></a></li>
+  <li id="starred-personal-li" class="menu-item menu-item-buddypress-navigation menu-item-has-children"><a href="'.$user_domain .'messages/starred/"><span>Starred</span></a></li>
+  <li id="sentbox-personal-li" class="menu-item menu-item-buddypress-navigation menu-item-has-children"><a href="'.$user_domain .'messages/sentbox/"><span>Sent</span></a></li>
+  <li id="compose-personal-li" class="menu-item menu-item-buddypress-navigation menu-item-has-children"><a href="'.$user_domain .'messages/compose/"><span>Compose</span></a></li>
+</ul>
+</li>
+<li id="groups-personal-li" class="menu-item menu-item-buddypress-navigation menu-item-has-children"><a href="'.$user_domain .'groups/"><span>Groups <span class="count">1</span></span></a>
+<ul class="sub-menu">
+  <li id="groups-my-groups-personal-li" class="menu-item menu-item-buddypress-navigation menu-item-has-children"><a href="'.$user_domain .'groups/"><span>Memberships</span></a></li>
+  <li id="invites-personal-li" class="menu-item menu-item-buddypress-navigation menu-item-has-children"><a href="'.$user_domain .'groups/invites/"><span>Invitations</span></a></li>
+  <li id="group-create-personal-li" class="menu-item menu-item-buddypress-navigation menu-item-has-children"><a href="'.$user_domain .'groups/create/"><span>Create a Group</span></a></li>
+</ul>
+</li>
+<li id="settings-personal-li" class="menu-item menu-item-buddypress-navigation menu-item-has-children"><a href="'.$user_domain .'settings/"><span>Settings</span></a>
+<ul class="sub-menu">
+  <li id="general-personal-li" class="menu-item menu-item-buddypress-navigation menu-item-has-children"><a href="'.$user_domain .'settings/"><span>General</span></a></li>
+  <li id="notifications-personal-li" class="menu-item menu-item-buddypress-navigation menu-item-has-children"><a href="'.$user_domain .'settings/notifications/"><span>Email</span></a></li>
+  <li id="profile-personal-li" class="menu-item menu-item-buddypress-navigation menu-item-has-children"><a href="'.$user_domain .'settings/profile/"><span>Profile Visibility</span></a>
+  <ul class="sub-menu">
+    <li id="edit-personal-li" class="menu-item menu-item-buddypress-navigation menu-item-has-children"><a href="'.$user_domain .'profile/edit/"><span>Edit</span></a></li>
+    <li id="change-avatar-personal-li" class="menu-item menu-item-buddypress-navigation menu-item-has-children"><a href="'.$user_domain .'profile/change-avatar/"><span>Change Profile Photo</span></a></li>
+    <li id="change-cover-image-personal-li" class="menu-item menu-item-buddypress-navigation menu-item-has-children"><a href="'.$user_domain .'profile/change-cover-image/"><span>Change Cover Image</span></a></li>
+  </ul>
+</li>
+  <li id="invites-personal-li" class="menu-item menu-item-buddypress-navigation menu-item-has-children"><a href="'.$user_domain .'settings/invites/"><span>Group Invites</span></a></li>
+  <li id="data-personal-li" class="menu-item menu-item-buddypress-navigation menu-item-has-children"><a href="'.$user_domain .'settings/data/"><span>Export Data</span></a></li>
+  <li id="delete-account-personal-li" class="menu-item menu-item-buddypress-navigation menu-item-has-children"><a href="'.$user_domain .'settings/delete-account/"><span>Delete Account</span></a></li>
+</ul>
+</li>
+<li id="rsc-videos-personal-li" class="menu-item menu-item-buddypress-navigation menu-item-has-children"><a href="'.$homeUrl.'/rsc-videos/"><span>Rockstar TV</span></a></li>
+<li id="rn-rooms-personal-li" class="menu-item menu-item-buddypress-navigation menu-item-has-children"><a href="'.$homeUrl.'/rsc-vroom/"><span>VN Rooms</span></a></li>
+<li id="member-directory-personal-li" class="menu-item menu-item-buddypress-navigation menu-item-has-children"><a href="'.$homeUrl.'/members/"><span>Directory</span></a></li>
+<li id="logout-li" class="menu-item menu-item-buddypress-navigation menu-item-has-children"><a href="' . wp_logout_url( home_url() ) . '"><span>Logout</span></a></li>';
+  return $menus;
+}
+add_filter('wonka_nav_menu_items', 'global_menu', 10, 2);
 
 /*----------  This is for the buddypress menu  ----------*/
 if ( ! function_exists( 'x_buddypress_navbar_menu' ) ) :
@@ -431,3 +512,37 @@ function wonka_admin_do_wp_nav_menu_meta_box() {
 }
 // Load the Wonka BP metabox in the WP Nav Menu Admin UI.
 // add_action( 'load-nav-menus.php', 'wonka_admin_do_wp_nav_menu_meta_box' );
+
+
+// function custom_bp_nouveau_nav_items() {
+//   $bp_nouveau = bp_nouveau();
+//   $myArray = array();
+//   $myArray[] = array(
+//                     'name' => 'Followers',
+//                     'link' => 'http://rockstar.local/members/rockstar1/activity/',
+//                     'slug' => 'test',
+//                     'parent_slug' => 'activity',
+//                     'css_id' => 'members-followers',
+//                     'position' => 70,
+//                     'user_has_access' => 1,
+//                     'secondary' => 1
+//                   )
+//   ;
+//           print_r($myArray); die;  
+//    $test = array_push($bp_nouveau->sorted_nav, $myArray);          
+
+        
+//   print_r($test); die;
+
+//   if ( isset( $bp_nouveau->sorted_nav[ $bp_nouveau->current_nav_index ] ) ) {
+//     return true;
+//   }
+
+//   $bp_nouveau->current_nav_index = 0;
+//   unset( $bp_nouveau->current_nav_item );
+
+//   return false;
+// }
+
+
+// add_action('bp_nouveau_nav_items', 'custom_bp_nouveau_nav_items');
