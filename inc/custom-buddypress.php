@@ -516,23 +516,26 @@ function wonka_admin_do_wp_nav_menu_meta_box() {
 
 // function custom_bp_nouveau_nav_items() {
 //   $bp_nouveau = bp_nouveau();
-//   $myArray = array();
-//   $myArray[] = array(
-//                     'name' => 'Followers',
-//                     'link' => 'http://rockstar.local/members/rockstar1/activity/',
-//                     'slug' => 'test',
-//                     'parent_slug' => 'activity',
-//                     'css_id' => 'members-followers',
-//                     'position' => 70,
-//                     'user_has_access' => 1,
-//                     'secondary' => 1
-//                   )
-//   ;
-//           print_r($myArray); die;  
-//    $test = array_push($bp_nouveau->sorted_nav, $myArray);          
-
+//    //print_r($bp_nouveau->sorted_nav); die;
+//   // $myArray = array();
+//   // $myArray = array(
+//   //                   'name' => 'Followers',
+//   //                   'link' => 'http://rockstar.local/members/rockstar1/activity/',
+//   //                   'slug' => 'test',
+//   //                   'parent_slug' => 'activity',
+//   //                   'css_id' => 'members-followers',
+//   //                   'position' => 70,
+//   //                   'user_has_access' => 1,
+//   //                   'secondary' => 1
+//   //                 )
+//   // ;
+//   //  $obj = new BP_Core_Nav_Item($myArray);
+//   //  $test1 = $bp_nouveau->sorted_nav;
+//   //  $test1[count($test1)]= $obj ;  
+//   //   print_r($bp_nouveau->sorted_nav); print_r("expression");
+//   //  $bp_nouveau->sorted_nav = $test1;
+      
         
-//   print_r($test); die;
 
 //   if ( isset( $bp_nouveau->sorted_nav[ $bp_nouveau->current_nav_index ] ) ) {
 //     return true;
@@ -540,7 +543,8 @@ function wonka_admin_do_wp_nav_menu_meta_box() {
 
 //   $bp_nouveau->current_nav_index = 0;
 //   unset( $bp_nouveau->current_nav_item );
-
+// // print_r($bp_nouveau->current_nav_item);
+// // die;
 //   return false;
 // }
 
