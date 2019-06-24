@@ -119,7 +119,7 @@ function bp_friends_custom_request_and_follow($friendship_id) {
   
 }
 
-add_action( 'friends_friendship_accepted',  'bp_friends_custom_accept_and_follow', 10, 3 );
+//add_action( 'friends_friendship_accepted',  'bp_friends_custom_accept_and_follow', 10, 3 );
 function bp_friends_custom_accept_and_follow($friendship_id) {
   $friendship = new BP_Friends_Friendship( $friendship_id, true, false );
   bp_follow_start_following( array( 'leader_id' => $friendship->initiator_user_id, 'follower_id' => $friendship->friend_user_id ));
