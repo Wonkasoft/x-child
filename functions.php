@@ -36,6 +36,12 @@ require_once( get_stylesheet_directory() . '/inc/custom-buddypress.php');
 /*=====  End of Custom Functions for Buddypress  ======*/
 
 /*=======================================================
+=            Custom Functions for menu-items            =
+=======================================================*/
+require_once( get_stylesheet_directory() . '/inc/custom-menu-items.php');
+/*=====  End of Custom Functions for menu-items  ======*/
+
+/*=======================================================
 =            Custom Functions for Gravity Forms         =
 =======================================================*/
 require_once( get_stylesheet_directory() . '/inc/custom-gravity-forms-fields.php');
