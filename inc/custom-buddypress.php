@@ -3,30 +3,31 @@
  *
  * This file has all buddypress custom functions
  *
+ * @package
  * @since 1.0.0
- * 
  */
+
 defined( 'ABSPATH' ) || exit;
 
 /*================================================================
 =            Load specific files for custom functions            =
 ================================================================*/
-require( dirname( __FILE__ ) . '/bp-custom-widgets.php');
-require( dirname( __FILE__ ) . '/class-custom-bp-nav-menu.php');
-require( dirname( __FILE__ ) . '/class-bp-custom-members-widget.php');
-require( dirname( __FILE__ ) . '/class-bp-custom-whos-online-widget.php');
+require( dirname( __FILE__ ) . '/bp-custom-widgets.php' );
+require( dirname( __FILE__ ) . '/class-custom-bp-nav-menu.php' );
+require( dirname( __FILE__ ) . '/class-bp-custom-members-widget.php' );
+require( dirname( __FILE__ ) . '/class-bp-custom-whos-online-widget.php' );
 /*=====  End of Load specific files for custom functions  ======*/
 
 /**
  * [custom_friendship_button description]
- * @param  [array] $button 
- * @param  [string] $leader_id  
- * @param  [string] $follower_id 
- * @return [array]              
+ * @param  [array] $button
+ * @param  [string] $leader_id
+ * @param  [string] $follower_id
+ * @return [array]      
  */
 function custom_friendship_button( $button ) {
   if ( $button['id'] === 'not_friends' ) :
-    $button['link_text'] = 'Connect';
+        $button['link_text'] = 'Connect';
   endif;
   
   if ( $button['id'] === 'is_friend' ) :
@@ -48,8 +49,8 @@ add_filter( 'bp_get_add_friend_button', 'custom_friendship_button');
 /**
  * [filter_bp_nav_menu_items description]
  * @param  [array] $items
- * @param  [array] $args  
- * @return [array]        
+ * @param  [array] $args
+ * @return [array]
  */
 function filter_bp_nav_menu_items( $items ) {
   $user_domain = bp_loggedin_user_domain();
