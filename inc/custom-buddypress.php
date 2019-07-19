@@ -54,41 +54,37 @@ add_filter( 'bp_get_add_friend_button', 'custom_friendship_button');
 function filter_bp_nav_menu_items( $items ) {
   $user_domain = bp_loggedin_user_domain();
   
-  foreach ($items as $key => $item ) :
-    if ( strpos( $item->link, $user_domain ) === false ) :
-      $item->link = _x( $user_domain . $item->link, '__x__' );
-    endif;
-    if ( $item->name === 'View' ) :
-      unset($items[$key]);
-    endif;
-    if ( $item->css_id === 'members-following' ) :
-      unset($items[$key]);
-    endif;
-    if ( $item->css_id === 'members-followers' ) :
-      $items[$key]->name = 'Followers';
-      $items[$key]->parent = 'activity';
-    endif;
-    if ( $item->css_id === 'friends-my-friends' ) :
-      $items[$key]->parent = 'activity-friends';
-    endif;
-    if ( $item->css_id === 'requests' ) :
-      $items[$key]->parent = 'activity-friends';
-    endif;
-    if ( $item->css_id === 'friends' ) :
-      unset($items[$key]);
-    endif;
-    // if ( $item->css_id === 'notifications' ) :
-    //   unset($items[$key]);
-    // endif;
-    // if ( $item->name === 'Profile') :
-    //   $item->name = __( "Edit Profile", '__x__' );
-    //   $item->link = _x( $user_domain . "profile/edit", '__x__' );
-    // endif;
-    if ( $item->name === 'Home' ) :
-      $item->name = _x( "Profile", '__x__' );
-      $item->link = _x( "$user_domain", '__x__' );
-    endif;
-  endforeach;
+  if ( $items !== NULL ) {
+
+    foreach ($items as $key => $item ) :
+      if ( strpos( $item->link, $user_domain ) === false ) :
+        $item->link = _x( $user_domain . $item->link, '__x__' );
+      endif;
+      if ( $item->name === 'View' ) :
+        unset($items[$key]);
+      endif;
+      if ( $item->css_id === 'members-following' ) :
+        unset($items[$key]);
+      endif;
+      if ( $item->css_id === 'members-followers' ) :
+        $items[$key]->name = 'Followers';
+        $items[$key]->parent = 'activity';
+      endif;
+      if ( $item->css_id === 'friends-my-friends' ) :
+        $items[$key]->parent = 'activity-friends';
+      endif;
+      if ( $item->css_id === 'requests' ) :
+        $items[$key]->parent = 'activity-friends';
+      endif;
+      if ( $item->css_id === 'friends' ) :
+        unset($items[$key]);
+      endif;
+      if ( $item->name === 'Home' ) :
+        $item->name = _x( "Profile", '__x__' );
+        $item->link = _x( "$user_domain", '__x__' );
+      endif;
+    endforeach;
+  }
   $newitem = new stdClass();
   $newitem->class = array( 'menu-child' );
     $newitem->css_id =  'group-create';
@@ -144,7 +140,7 @@ function filter_bp_nav_menu_items( $items ) {
   return $items;
 }
 // add the filter 
-add_filter( 'bp_get_nav_menu_items', 'filter_bp_nav_menu_items', 50 ); 
+add_filter( 'bp_get_nav_menu_items', 'filter_bp_nav_menu_items', 50, 1 ); 
 
 function wonka_bp_nav_menu( $args = array() ) {
   static $menu_id_slugs = array();

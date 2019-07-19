@@ -1,25 +1,35 @@
-
 <?php
+/**
+ * wonka_menu_on_admin_screen 
+ * 
+ * @package x-child
+ * @subpackage x_child
+ * @since 1.0.0
+ * @author Carlos
+ */
 
- 
-function wonka_menu_on_admin_screen_() {
+/*Remove the BuddyPress metabox in the WP Nav Menu Admin UI.
+* Is called in class-bp-admin.php on line 153*/
+remove_action( 'load-nav-menus.php', 'bp_admin_wp_nav_menu_meta_box' );
+
+function wonka_menu_on_admin_screen() {
   if ( ! bp_is_root_blog() ) {
 		return;
 	}
 
-  add_meta_box( 'wonka-add-buddypress-nav-menu', __( 'custom-BuddyPress', 'buddypress' ), 'wonka_bp_admin_do_wp_nav_menu_meta_box', 'nav-menus', 'side', 'default' );
+  add_meta_box( 'wonka-add-buddypress-nav-menu', __( 'Rockstar Community Menu', 'buddypress' ), 'wonka_bp_admin_do_wp_nav_menu_meta_box', 'nav-menus', 'side', 'default' );
   
 	add_action( 'admin_print_footer_scripts', 'bp_admin_wp_nav_menu_restrict_items' );
 
 	
 
 }
-add_action( 'admin_init', 'wonka_menu_on_admin_screen_' );
+add_action( 'admin_init', 'wonka_menu_on_admin_screen' );
 
 /**
  * Build and populate the BuddyPress accordion on Appearance > Menus.
  *
- * @since 1.9.0
+ * @since 1.0.0
  *
  * @global $nav_menu_selected_id
  */
@@ -116,8 +126,53 @@ function wonka_bp_admin_do_wp_nav_menu_meta_box() {
  */
 function wonka_bp_nav_menu_get_loggedin_pages() {
 	$bp = buddypress();
+	$component = 'members';
+	$menu = array();
+	foreach ( $bp->{$component}->nav->get_item_nav() as $nav_menu ) {
+		// Get the correct menu link. See https://buddypress.trac.wordpress.org/ticket/4624.
+		$link = bp_loggedin_user_domain() ? str_replace( bp_loggedin_user_domain(), bp_displayed_user_domain(), $nav_menu->link ) : trailingslashit( bp_displayed_user_domain() . $nav_menu->link );
+	
+		// Add this menu.
+		$menu         = new stdClass;
+		$menu->class  = array( 'menu-parent' );
+		$menu->css_id = $nav_menu->css_id;
+		$menu->link   = $link;
+		$menu->name   = $nav_menu->name;
+		$menu->parent = 0;
+	
+		if ( ! empty( $nav_menu->children ) ) {
+			$submenus = array();
+	
+			foreach( $nav_menu->children as $sub_menu ) {
+				$submenu = new stdClass;
+				$submenu->class  = array( 'menu-child' );
+				$submenu->css_id = $sub_menu->css_id;
+				$submenu->link   = $sub_menu->link;
+				$submenu->name   = $sub_menu->name;
+				$submenu->parent = $nav_menu->slug;
+	
+				// If we're viewing this item's screen, record that we need to mark its parent menu to be selected.
+				if ( bp_is_current_action( $sub_menu->slug ) && bp_is_current_component( $nav_menu->slug ) ) {
+					$menu->class[]    = 'current-menu-parent';
+					$submenu->class[] = 'current-menu-item';
+				}
+	
+				$submenus[] = $submenu;
+			}
+		}
+	
+		$menus[] = $menu;
+	
+		if ( ! empty( $submenus ) ) {
+			$menus = array_merge( $menus, $submenus );
+		}
+	}
 
-	// Try to catch the cached version first.
+	
+// echo "<pre>\n";
+// print_r( $menus );
+// echo "</pre>\n";
+	//Try to catch the cached version first.
 	if ( ! empty( $bp->wp_nav_menu_items->loggedin ) ) {
 		return $bp->wp_nav_menu_items->loggedin;
 	}
@@ -140,21 +195,22 @@ function wonka_bp_nav_menu_get_loggedin_pages() {
 
 	$page_args = array();
 
-	foreach ( $bp_menu_items as $bp_item ) {
-
-		// Remove <span>number</span>.
-		$item_name = _bp_strip_spans_from_title( $bp_item['name'] );
-
-		$page_args[ $bp_item['slug'] ] = (object) array(
+	foreach ( $menus as $bp_item ) {
+// 		echo "<pre>\n";
+// print_r( $bp_item );
+// echo "</pre>\n";
+		// // Remove <span>number</span>.
+		$item_name = _bp_strip_spans_from_title( $bp_item->name );
+		$page_args[ strtolower($bp_item->name) ] = (object) array(
 			'ID'             => -1,
 			'post_title'     => $item_name,
 			'post_author'    => 0,
 			'post_date'      => 0,
-			'post_excerpt'   => $bp_item['slug'],
-			'post_type'      => 'page',
+			'post_excerpt'   => strtolower($bp_item->name),
+			'post_type'      => 'post',
 			'post_status'    => 'publish',
 			'comment_status' => 'closed',
-			'guid'           => $bp_item['link']
+			'guid'           => $bp_item->link
 		);
 	}
 
@@ -165,6 +221,8 @@ function wonka_bp_nav_menu_get_loggedin_pages() {
 	$bp->wp_nav_menu_items->loggedin = $page_args;
 
 	return $page_args;
+
+
 }
 
 /**
@@ -219,11 +277,6 @@ function wonka_bp_nav_menu_get_loggedout_pages() {
 
 	$menu_items = apply_filters( "bp_get_nav_menu_items", $items );
 
-
-	echo "<pre>\n";
-	print_r( $menu_items );
-	echo "</pre>\n";
-
 	$page_args = array();
 
 	foreach ( $bp_menu_items as $bp_item ) {
@@ -245,7 +298,6 @@ function wonka_bp_nav_menu_get_loggedout_pages() {
 	}
 
 	$bp->wp_nav_menu_items->loggedout = $page_args;
-
 
 	return $page_args;
 }
