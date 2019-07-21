@@ -6,8 +6,6 @@
 // });
 
 jQuery( document ).ready(function() {
-var iprnminfo = document.querySelector('a.iprnm-infobox');
-	iprnminfo.style.display = 'none';
 var org = window.origin;
 var path = location.pathname.split('/');
 var followUrl = org+"/"+location.pathname.split('/')[1]+"/"+location.pathname.split('/')[2]+"/followers";
