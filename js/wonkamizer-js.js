@@ -241,7 +241,7 @@
 		/**
 		 * This function creates the Url for the Invite Conference page
 		 *
-		 * @return  {vars}  
+		 * @return  {vars}
 		 */
 		function getUrlVars() {
 				var vars = {};
