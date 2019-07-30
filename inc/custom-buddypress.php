@@ -379,7 +379,7 @@ if ( ! function_exists( 'x_buddypress_navbar_menu' ) ) :
        
         if ( ! is_user_logged_in() ) {
           if ( bp_get_signup_allowed() ) {
-            $submenu_items .= '<li class="menu-item menu-item-buddypress-navigation"><a href="/membership-levels" class="cf"><i class="x-icon-pencil" data-x-icon="&#xf040;" aria-hidden="true"></i> <span>' . x_get_option( 'x_buddypress_register_title' ) . '</span></a></li>';
+            $submenu_items .= '<li class="menu-item menu-item-buddypress-navigation"><a href="'. home_url() .'/membership-levels" class="cf"><i class="x-icon-pencil" data-x-icon="&#xf040;" aria-hidden="true"></i> <span>' . x_get_option( 'x_buddypress_register_title' ) . '</span></a></li>';
 
             // $submenu_items .= '<li class="menu-item menu-item-buddypress-navigation"><a href="' . bp_get_activation_page() . '" class="cf"><i class="x-icon-key" data-x-icon="&#xf084;" aria-hidden="true"></i> <span>' . x_get_option( 'x_buddypress_activate_title' ) . '</span></a></li>';
           }
@@ -398,13 +398,13 @@ if ( ! function_exists( 'x_buddypress_navbar_menu' ) ) :
             $submenu_items .= '<li class="menu-item menu-item-buddypress-navigation"><a href="' . bp_get_blogs_directory_permalink() . '" class="cf"><i class="x-icon-file" data-x-icon="&#xf15b;" aria-hidden="true"></i> <span>' . x_get_option( 'x_buddypress_blogs_title' ) . '</span></a></li>';
           }
 
-          $submenu_items .= '<li class="menu-item menu-item-buddypress-navigation"><a href="/market-place/" class="cf"><i class="x-icon-male" data-x-icon="&#xf07a;" aria-hidden="true"></i> <span>Market Place</span></a></li>';
+          $submenu_items .= '<li class="menu-item menu-item-buddypress-navigation"><a href="'. home_url() .'/market-place/" class="cf"><i class="x-icon-male" data-x-icon="&#xf07a;" aria-hidden="true"></i> <span>Market Place</span></a></li>';
 
           $submenu_items .= '<li class="menu-item menu-item-buddypress-navigation"><a href="' . get_post_type_archive_link( 'rsc_videos' ) . '" class="cf"><i class="x-icon-video-camera" data-x-icon="&#xf03d;" aria-hidden="true"></i> <span>' . __( 'Videos', '__x__' ) . '</span></a></li>';
 
-          $submenu_items .= '<li class="menu-item menu-item-buddypress-navigation menu-item-has-children"><a href="/rsc-vroom/" class="cf"><i class="x-icon-users" data-x-icon="" aria-hidden="true"></i> <span>' . __( 'VRoom', '__x__' ) . '</span></a>';
+          $submenu_items .= '<li class="menu-item menu-item-buddypress-navigation menu-item-has-children"><a href="'. home_url() .'/rsc-vroom/" class="cf"><i class="x-icon-users" data-x-icon="" aria-hidden="true"></i> <span>' . __( 'VRoom', '__x__' ) . '</span></a>';
           
-          $submenu_items .= '<ul class="sub-menu"><li class="menu-item menu-item-buddypress-navigation"><a href="/create-conference/" class="cf"><i class="x-icon-cog" data-x-icon="&#xf013;" aria-hidden="true"></i> <span>' . __( 'Create Conference', '__x__' ) . '</span></a></li></ul></li>';
+          $submenu_items .= '<ul class="sub-menu"><li class="menu-item menu-item-buddypress-navigation"><a href="'. home_url() .'/create-conference/" class="cf"><i class="x-icon-cog" data-x-icon="&#xf013;" aria-hidden="true"></i> <span>' . __( 'Create Conference', '__x__' ) . '</span></a></li></ul></li>';
           
           $submenu_items .= '<li class="menu-item menu-item-buddypress-navigation menu-item-has-children"><a id="current-user-profile" href="' . bp_loggedin_user_domain() . '" class="cf"><i class="x-icon-cog" data-x-icon="&#xf013;" aria-hidden="true"></i> <span>' . __( 'Profile', '__x__' ) . '</span></a>';
 
