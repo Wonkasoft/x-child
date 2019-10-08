@@ -5,11 +5,78 @@
 * Author URI: http://theme.co/
 * Description: Make all of your modifications to X in this child theme.
 * Version: 1.0.0
+<<<<<<< HEAD
 * Template: X
+=======
+* Template: x
+>>>>>>> 93742617a7085d09f4e0ec4515f0e7bf396294f5
 */
 
 @import "mixins/mixins-master";
 
+<<<<<<< HEAD
+=======
+.iee_archive .archive-event .iee_event {
+	-webkit-transition: all .35s ease-in-out;
+transition: all .35s ease-in-out;
+	height: 210px;
+}
+
+.iee_event {
+	border-radius: 4px;
+	padding: 5px;
+	margin-bottom: 20px;
+	box-shadow: 0px 1px 6px 0px rgba(0,0,0,.4);
+	overflow: hidden;
+}
+
+.event_excerpt p {
+	clear: both;
+padding: 8px;
+}
+
+.event_excerpt div {
+margin-top: 8px;
+}
+
+.single-eventbrite_events .p-meta, .single-eventbrite_events .iee_organizermain, #x-iso-container .p-meta {
+display:none;
+}
+
+#ShareCon {
+	width: 68%;
+    margin-right: 8px;
+    font-size: 12pt;
+    margin-top: 10px;
+}
+
+.el2.x-container.max.width {
+	width: 100%;
+}
+
+.buddypress .buddypress-wrap input[type=submit],.buddypress .buddypress-wrap input[type=submit] {
+	background: hsl(6,100%,37%);
+	color:#ffffff;
+	border-color: hsla(6,100%,34%,0);
+}
+
+.buddypress .buddypress-wrap input[type=submit]:focus, .buddypress .buddypress-wrap input[type=submit]:hover{
+	color: #ffffff;
+	border-color: hsla(6,100%,19%,0);
+	background-color: hsl(8,100%,32%);
+}
+
+@media screen and (min-width: 55em) {
+	.buddypress-wrap form.bp-dir-search-form, .buddypress-wrap form.bp-invites-search-form, .buddypress-wrap form.bp-messages-search-form {
+			width: 21em;
+	}
+}
+
+.ipnrm .ipnrm-btn-info {
+	display:none;	
+	}
+
+>>>>>>> 93742617a7085d09f4e0ec4515f0e7bf396294f5
 * {
 	box-sizing: border-box;
 }
@@ -1474,4 +1541,8 @@ i.fa.fa-volume-up {
 		}
 	}
 }
+<<<<<<< HEAD
 /*=====  End of For Welcome Page  ======*/
+=======
+/*=====  End of For Welcome Page  ======*/
+>>>>>>> 93742617a7085d09f4e0ec4515f0e7bf396294f5

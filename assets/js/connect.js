@@ -1,9 +1,18 @@
+<<<<<<< HEAD
 jQuery( document ).ajaxComplete(function( event, xhr, settings ) {
 	var res = settings.data.split("&");
 	if(res[1] == "action=friends_add_friend"){
 		location.reload();
 	}
 });
+=======
+// jQuery( document ).ajaxComplete(function( event, xhr, settings ) {
+// 	var res = settings.data.split("&");
+// 	if(res[1] == "action=friends_add_friend"){
+// 		location.reload();
+// 	}
+// });
+>>>>>>> 93742617a7085d09f4e0ec4515f0e7bf396294f5
 
 jQuery( document ).ready(function() {
 var org = window.origin;

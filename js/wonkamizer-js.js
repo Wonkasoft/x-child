@@ -5,19 +5,117 @@
 /*===========================================================
 =            Strict Functions that can be called            =
 ===========================================================*/
+	/**
+	 * This function is to adjust sizing for width and height 
+	 * This is being called in the Onload function
+	 *
+	 * @author Carlos 
+	 */
+	function fix_event_height() {
+		var height_adjust_timer;
+		var event_posts;
+		console.log('entered function');
+		clearTimeout(height_adjust_timer);
+		height_adjust_timer = setTimeout( function() {
+			if ( window.innerWidth < 420 ) {
+				event_posts = document.querySelectorAll( '.iee_archive .archive-event .iee_event' );
+				event_posts.forEach( function(el) {
+						el.style.height = '640px';
+				});
+			}
+			if ( window.innerWidth < 481 && window.innerWidth >= 420 ) {
+				event_posts = document.querySelectorAll( '.iee_archive .archive-event .iee_event' );
+				event_posts.forEach( function(el) {
+						el.style.height = '510px';
+				});
+			}
+			if ( window.innerWidth < 601 && window.innerWidth >= 481 ) {
+				event_posts = document.querySelectorAll( '.iee_archive .archive-event .iee_event' );
+				event_posts.forEach( function(el) {
+						el.style.height = '515px';
+				});
+			}
+			if ( window.innerWidth <= 768 && window.innerWidth >= 601 ) {
+				event_posts = document.querySelectorAll( '.iee_archive .archive-event .iee_event' );
+				event_posts.forEach( function(el) {
+						el.style.height = '470px';
+				});
+			}
+			if ( window.innerWidth <= 979 && window.innerWidth > 768 ) {
+				event_posts = document.querySelectorAll( '.iee_archive .archive-event .iee_event' );
+				event_posts.forEach( function(el) {
+						el.style.height = '440px';
+				});
+			}
+			if ( window.innerWidth <= 1244 && window.innerWidth > 979 ) {
+				event_posts = document.querySelectorAll( '.iee_archive .archive-event .iee_event' );
+				event_posts.forEach( function(el) {
+						el.style.height = '435px';
+				});
+			}
+			if ( window.innerWidth > 1244 ) {
+				event_posts = document.querySelectorAll( '.iee_archive .archive-event .iee_event' );
+				event_posts.forEach( function(el) {
+						el.style.height = '390px';
+				});
+			}
+		}, 1500 );
+	}
+
+	/**
+	 * Function creates a temp input to copy to clipboard and changes the 
+	 * tooltip
+	 *
+	 * @param   string  input element to be copied  
+	 *
+	 * @return  {[type]}           [return description]
+	 */
+	function copy_to_clipboard_conference( element ) 
+	{
+		console.log(element);
+		/* setting up and executing copy command */
+		var $temp = $( '<input>');
+		$( "body" ).append( $temp );
+		$temp.val($( element).val()).select();
+		document.execCommand( "copy" );
+		$temp.remove();
+
+		/* checking for copy conference link btn */
+		if ( $( 'div.x-btn-small.x-btn' ).length ) 
+		{
+			/* Print copy confimation in tooltip */
+			var tooltip_id = document.querySelector( '#conference-copy').getAttribute( 'aria-describedby' );
+			console.log(tooltip_id);
+			document.querySelector( '#' + tooltip_id + ' .tooltip-inner' ).innerText = 'Affiliate link has been copied!';
+		}
+	}
+
 	// For created url copy to clipboard
 	function copy_to_clipboard( element ) 
 	{
 		/* setting up and executing copy command */
 		var $temp = $( "<input>" );
+		var tooltip_id;
 		$( "body" ).append( $temp );
 		$temp.val($( element).text()).select();
 		document.execCommand( "copy" );
 		$temp.remove();
 
-		/* Print copy confimation in tooltip */
-		var tooltip_id = document.querySelector( '.affiliate-copy-btn-wrap > a').getAttribute( 'aria-describedby' );
-		document.querySelector( '#' + tooltip_id + ' .tooltip-inner' ).innerText = 'Affiliate link has been copied!';
+		/* checking for copy affiliate link btn */
+		if ( $( 'div.affiliate-copy-btn-wrap' ).length ) 
+		{
+			 // Print copy confimation in tooltip 
+			tooltip_id = document.querySelector( '.affiliate-copy-btn-wrap > a').getAttribute( 'aria-describedby' );
+			document.querySelector( '#' + tooltip_id + ' .tooltip-inner' ).innerText = 'Affiliate link has been copied!';
+		}
+
+		/* checking for copy affiliate link btn */
+		if ( $( 'a.affiliate-copy-link' ).length ) 
+		{
+			/* Print copy confimation in tooltip */
+			tooltip_id = document.querySelector( '.affiliate-copy-btn-wrap > a').getAttribute( 'aria-describedby' );
+			document.querySelector( '#' + tooltip_id + ' .tooltip-inner' ).innerText = 'Affiliate link has been copied!';
+		}
 	}
 
 	/* This function is for making element adjustments for the welcome page */
@@ -110,6 +208,72 @@
 ============================================================*/
 	window.onload = function() 
 	{
+		/**
+		 * Fetches the eventbrite sign up from bottom 
+		 * and adds it to the top as well
+		 *
+		 * @author Carlos 
+		 */
+		if (document.querySelector(".eventbrite-ticket-section")) {
+			var target = document.querySelector(".eventbrite-ticket-section");
+			var newBox = document.querySelector("#new-registration-box");
+			var copyBox = target.cloneNode(true);
+			newBox.append(copyBox);
+		 
+			var readmore = document.querySelector(".event_excerpt div");
+		 console.log(readmore);
+			var excerpt_p_el = document.querySelector(".event_excerpt p");
+			readmore.appendChild(excerpt_p_el);
+		}
+		if (document.querySelector(".page-id-9")) {
+				var the_excerpts = document.querySelectorAll(".event_excerpt");
+				the_excerpts.forEach (function( el ) {
+					var readmore_div = el.querySelector( "div" );
+					var readmore = el.querySelector( "div .more-link" );
+					readmore.classList.add('x-btn');
+					readmore.classList.add('x-btn-small');
+					var excerpt_p_el = el.querySelector( "p" );
+					excerpt_p_el.appendChild(readmore_div);
+				});
+				fix_event_height();
+				window.onresize = function(){ fix_event_height(); };
+		}
+	 
+		/**
+		 * This function creates the Url for the Invite Conference page
+		 *
+		 * @return  {vars}
+		 */
+		function getUrlVars() {
+				var vars = {};
+				var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+						vars[key] = value;
+				});
+				return vars;
+		}
+		var perm = getUrlVars();
+		if ( perm.username ) {
+			var shareLinkInput = document.getElementById("ShareCon");
+			var startBtn = document.getElementById("startConf");
+			var shareLink = "http://localhost/rockstar.com/join-private-conference/?meetingname=" + perm.meetingname + "&pa=" + perm.pa;
+			var startLink = "https://rockstarconference.name/demo/demoHTML5Video.jsp?username=" + perm.username + "&meetingname=" + perm.meetingname + "&record=true&allowStartStopRecording=true&action=create";
+			startBtn.href=startLink;
+			shareLinkInput.value=shareLink;
+		}
+
+		/* checking for copy Conference link btn */
+		if ( $( 'div.x-btn-small' ).length ) 
+		{
+			//This calls the copy to clipboard function when the clipboard div is clicked.
+			$( 'div.x-btn-small' ).click( function (e) 
+			{
+				e.preventDefault();
+				
+				/* call copy command to copy link */
+				copy_to_clipboard_conference( '#ShareCon' );
+			});
+		}
+
 		/* checking for copy affiliate link btn */
 		if ( $( 'div.affiliate-copy-btn-wrap' ).length ) 
 		{
@@ -216,5 +380,4 @@
 		}
 	};
 /*=====  End of To run when document is fully loaded  ======*/
-
 })(jQuery);

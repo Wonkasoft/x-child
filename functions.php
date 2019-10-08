@@ -1,5 +1,4 @@
 <?php
-
 // =============================================================================
 // FUNCTIONS.PHP
 // -----------------------------------------------------------------------------
@@ -21,7 +20,6 @@ add_filter( 'x_enqueue_parent_stylesheet', '__return_true' );
 
 // Additional Functions
 // =============================================================================
-
 register_nav_menus(
 	array(
 		'rsc_videos_menu' => __( 'Videos Menu', '__x__' ),
@@ -36,6 +34,13 @@ register_nav_menus(
 =======================================================*/
 require_once get_stylesheet_directory() . '/inc/custom-buddypress.php';
 /*=====  End of Custom Functions for Buddypress  ======*/
+
+/*
+=======================================================
+=            Custom Functions for menu-items            =
+=======================================================*/
+require_once get_stylesheet_directory() . '/inc/custom-menu-items.php';
+/*=====  End of Custom Functions for menu-items  ======*/
 
 /*
 =======================================================
@@ -59,8 +64,6 @@ function wssaved_register_link( $link ) {
 	return $link;
 }
 /*==============End Change Register Link================*/
-
-
 
 /*
 ==================================================
@@ -146,10 +149,3 @@ function bp_friends_custom_accept_and_follow( $friendship_id ) {
 }
 
 /*==============End Click on connect================*/
-
-function wonkasoft_bbb_form_submission( $entry, $form ) {
-
-	
-
-}
-add_action( 'gform_after_submission', 'wonkasoft_bbb_form_submission', 10, 2 );

@@ -1,4 +1,4 @@
-let gulp = require('gulp'),
+var gulp = require('gulp'),
 sass = require('gulp-sass'),
 sourcemaps = require('gulp-sourcemaps'),
 concat = require('gulp-concat'),
@@ -16,15 +16,16 @@ local = json.read('./package.json').get('localhost'),
 themeDir = '../' + themeName,
 plumberErrorHandler = { errorHandler: notify.onError({
 
-	title: 'Gulp',
+		title: 'Gulp',
 
-	message: 'Error: <%= error.message %>',
+		message: 'Error: <%= error.message %>',
 
-	line: 'Line: <%= line %>'
+		line: 'Line: <%= line %>'
 
-})
+	})
 
 };
+
 sass.compiler = require('node-sass');
 
 // Static server
