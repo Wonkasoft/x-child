@@ -5,7 +5,7 @@
 * Author URI: http://theme.co/
 * Description: Make all of your modifications to X in this child theme.
 * Version: 1.0.0
-* Template: X
+* Template: x
 */
 
 @import "mixins/mixins-master";
@@ -1200,6 +1200,11 @@ body, #buddypress {
 								color: #333333;
 								width: 80%;
 								height: 85%;
+								overflow: hidden;
+
+								h4.conference-title {
+									margin: 0;
+								}
 
 								.virtual-modal-close {
 									position: absolute;
@@ -1215,7 +1220,21 @@ body, #buddypress {
 									font-size: 18px;
 									line-height: 1;
 									font-weight: 700;
+									z-index: 999;
 									cursor: pointer;
+								}
+								div.col-conference {
+									transition: all .35s ease-in-out;
+
+									&.collapse-col-join-conference {
+										display: block;
+										margin: 0 -50% 0 0;
+									}
+
+									&.collapse-col-create-conference {
+										display: block;
+										margin: 0 0 0 -50%;
+									}
 								}
 
 								.gform_wrapper {
@@ -1223,10 +1242,18 @@ body, #buddypress {
 									align-items: center;
 									justify-content: center;
 									width: 100%;
-									height: 100%;
+									height: 80%;
 									padding: 25px;
 									overflow-y: auto;
 
+									form {
+										height: 0;
+										overflow: hidden;
+										
+										&.expand-form {
+											height: 100%;
+										}
+									}
 									form#gform_9 {
 										width: 85%;
 										text-align: center;

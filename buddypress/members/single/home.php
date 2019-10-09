@@ -147,9 +147,20 @@ global $current_user;
 		if ( bp_displayed_user_id() === $current_user->ID ) : ?>
 			<div id="virtual-modal">
 				<div class="virtual-modal-bg">
-					<div class="virtual-modal-container">
+					<div class="row virtual-modal-container">
 						<a class="virtual-modal-close">X</a>
-						<?php echo do_shortcode('[gravityform id="9" title="true" description="true" ajax="true"]'); ?>
+						<div class="col-12"><h2 class="text-center">Welcome to Rockstar VR Area</h2></div>
+						<div class="col-6 col-conference col-create-conference text-center">
+							<h3 class="conference-title create-conference text-center">Virtual Conference</h3>
+							<button type="button" class="btn btn-light create-conference-btn"><?php esc_html_e( 'Create Conference', 'x-child' ); ?></button>
+							<?php echo do_shortcode('[gravityform id="9" title="false" description="true" ajax="true"]'); ?>
+						</div>
+						<div class="col-6 col-conference col-join-conference text-center">
+							<h3 class="conference-title join-conference text-center">Join Virtual Conference</h3>
+							<button type="button" class="btn btn-light join-conference-btn"><?php esc_html_e( 'Join Conference', 'x-child' ); ?></button>
+							<?php echo do_shortcode('[gravityform id="17" title="false" description="true" ajax="true"]'); ?>
+						</div>
+
 					</div>
 				</div>
 			</div>

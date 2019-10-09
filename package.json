@@ -31,6 +31,6 @@
     "node-sass": "^4.12.0",
     "path": "^0.12.7"
   },
-  "siteName": "rockstarconnect.com",
-  "localhost": "https://listers.dev/"
+  "siteName": "rockstar.com",
+  "localhost": "https://localhost/"
 }
