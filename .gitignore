@@ -1,6 +1,5 @@
 *.log
 package-lock.json
-package.json
 .sass-cache
 node_modules
 node_modules/*
