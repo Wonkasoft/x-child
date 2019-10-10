@@ -165,25 +165,24 @@ global $current_user;
 			?>
 			<div id="virtual-modal">
 				<div class="virtual-modal-bg">
-					<div class="row virtual-modal-container">
-						<a class="virtual-modal-close">X</a>
-						<div class="col-12"><h2 class="text-center">Welcome to Rockstar VR Area</h2></div>
-						<div class="col-6 col-conference col-create-conference text-center">
+					<div class="virtual-modal-container">
+						<div class="virtual-modal-title"><h2 class="text-center">Welcome to Rockstar VR Area</h2><a class="virtual-modal-close">X</a></div>
+						<div class="col-conference col-create-conference text-center">
 							<h3 class="conference-title create-conference text-center">Virtual Conference</h3>
-							<div class="generic-button">
-								<button type="button" class="create-conference-btn"><?php esc_html_e( 'Create Conference', 'x-child' ); ?></button>
+							<div class="button-wrap">
+								<a type="button" class="create-conference-btn"><?php esc_html_e( 'Create Conference', 'x-child' ); ?></a>
 							</div>
 							<div id="create-conference-form-wraper">
 								<?php echo do_shortcode( '[gravityform id="9" title="false" description="true" ajax="true"]' ); ?>
 							</div>
 						</div>
-						<div class="col-6 col-conference col-join-conference text-center">
+						<div class="col-conference col-join-conference text-center">
 							<h3 class="conference-title join-conference text-center">Join Virtual Conference</h3>
-							<div class="generic-button">
-								<button type="button" class="join-conference-btn"><?php esc_html_e( 'Join Conference', 'x-child' ); ?></button>
+							<div class="button-wrap">
+								<a type="button" class="join-conference-btn"><?php esc_html_e( 'Join Conference', 'x-child' ); ?></a>
 							</div>
 							<div id="join-conference-form-wraper">
-								<?php echo do_shortcode( '[gravityform id="15" title="false" description="true" ajax="true"]' ); ?>
+								<?php echo do_shortcode( '[gravityform id="17" title="false" description="true" ajax="true"]' ); ?>
 							</div>
 						</div>
 

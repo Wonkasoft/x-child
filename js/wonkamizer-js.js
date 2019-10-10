@@ -218,21 +218,22 @@
 			var join_conference_toggle = document.querySelector( '.join-conference-btn' );
 			var col_create_conference = document.querySelector( '.col-create-conference' );
 			var col_join_conference = document.querySelector( '.col-join-conference' );
-			var create_conference_gform = document.querySelector( '#gform_9' );
-			var join_conference_gform = document.querySelector( '#gform_17' );
+			var create_conference_form_wrap = document.querySelector( '#create-conference-form-wraper' );
+			var join_conference_form_wrap = document.querySelector( '#join-conference-form-wraper' );
 
 			create_conference_toggle.addEventListener( 'click', function( e )
 			{
-				col_join_conference.classList.toggle('collapse-col-join-conference');
-				col_create_conference.classList.toggle( 'col-lg-12' );
-				create_conference_gform.classList.toggle( 'expand-form' );
+				console.log(create_conference_form_wrap);
+				col_create_conference.classList.toggle('expand-col-create-conference');
+				col_join_conference.classList.toggle('collapse-col-conference');
+				create_conference_form_wrap.classList.toggle('expand-conference-form-wraper');
 			});
 
 			join_conference_toggle.addEventListener( 'click', function( e )
 			{
-				col_create_conference.classList.toggle('collapse-col-create-conference');
-				col_join_conference.classList.toggle( 'col-lg-12' );
-				join_conference_gform.classList.toggle( 'expand-form' )
+				col_join_conference.classList.toggle('expand-col-join-conference');
+				col_create_conference.classList.toggle('collapse-col-conference');
+				join_conference_form_wrap.classList.toggle('expand-conference-form-wraper');
 			});
 		}
 
