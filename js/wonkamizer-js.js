@@ -214,6 +214,8 @@
 		 */
 		if ( document.querySelector( '.virtual-modal-container' ) )
 		{
+			var conference_container = document.querySelector( '.virtual-modal-container' );
+			var  modal_title= document.querySelector( '.virtual-modal-title' );
 			var create_conference_toggle = document.querySelector( '.create-conference-btn' );
 			var join_conference_toggle = document.querySelector( '.join-conference-btn' );
 			var col_create_conference = document.querySelector( '.col-create-conference' );
@@ -223,17 +225,35 @@
 
 			create_conference_toggle.addEventListener( 'click', function( e )
 			{
-				console.log(create_conference_form_wrap);
+				console.log(create_conference_toggle);
+				conference_container.classList.toggle('expand-col-create-conference');
+				// conference_container.classList.toggle('collapse-modal-title');
+				// conference_container.classList.toggle('vi');
 				col_create_conference.classList.toggle('expand-col-create-conference');
 				col_join_conference.classList.toggle('collapse-col-conference');
 				create_conference_form_wrap.classList.toggle('expand-conference-form-wraper');
+
+				if (create_conference_toggle.innerHTML === "Create Conference") {
+					create_conference_toggle.innerHTML = "Back to VR Area";
+				} else {
+					create_conference_toggle.innerHTML = "Create Conference";
+				}
 			});
 
 			join_conference_toggle.addEventListener( 'click', function( e )
 			{
+				conference_container.classList.toggle('expand-col-join-conference');
+				// conference_container.classList.toggle('collapse-modal-title');
+				// conference_container.classList.toggle('vi');
 				col_join_conference.classList.toggle('expand-col-join-conference');
 				col_create_conference.classList.toggle('collapse-col-conference');
 				join_conference_form_wrap.classList.toggle('expand-conference-form-wraper');
+
+				if (join_conference_toggle.innerHTML === "Join Conference") {
+					join_conference_toggle.innerHTML = "Back to VR Area";
+				} else {
+					join_conference_toggle.innerHTML = "Join Conference";
+				}
 			});
 		}
 
