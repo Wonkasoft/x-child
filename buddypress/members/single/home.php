@@ -13,6 +13,7 @@ global $current_user;
 	<div id="item-header" role="complementary" data-bp-item-id="<?php echo esc_attr( bp_displayed_user_id() ); ?>" data-bp-item-component="members" class="users-header single-headers">
 		<div id="red-bar-after-header"></div>
 		<?php bp_nouveau_member_header_template_part(); ?>
+		
 
 	</div><!-- #item-header -->
 
@@ -20,17 +21,31 @@ global $current_user;
 
 		<div class="profile-abouts">
 			<ul class="profile-news-list">
-				<li class="follows"><div class="follows-center"><div class="ws-badge"><?php if ( function_exists( 'bp_follow_total_follow_counts' ) ) $count = bp_follow_total_follow_counts( bp_displayed_user_id() ); echo $count['followers']; ?></div><span>Followers</span></div></li>
-				<li class="following"><div class="following-center"><div class="ws-badge"><?php if ( function_exists( 'bp_follow_total_follow_counts' ) ) $count = bp_follow_total_follow_counts( bp_displayed_user_id() ); echo $count['following']; ?></div><span>Following</span></div></li>
+				<li class="follows"><div class="follows-center"><div class="ws-badge">
+				<?php
+				if ( function_exists( 'bp_follow_total_follow_counts' ) ) {
+					$count = bp_follow_total_follow_counts( bp_displayed_user_id() );
+				} echo $count['followers'];
+				?>
+				</div><span>Followers</span></div></li>
+				<li class="following"><div class="following-center"><div class="ws-badge">
+				<?php
+				if ( function_exists( 'bp_follow_total_follow_counts' ) ) {
+					$count = bp_follow_total_follow_counts( bp_displayed_user_id() );
+				} echo $count['following'];
+				?>
+				</div><span>Following</span></div></li>
 					<li class="connect-button" id="connect-btn"><div id="profile-menu-anchor"><span>Menu</span>
-						<?php 
-						$counter = 0;
+						<?php
+						$counter       = 0;
 						$notifications = bp_notifications_get_notifications_for_user( bp_loggedin_user_id(), 'object' );
 						if ( $notifications ) :
 							foreach ( $notifications as $notice ) :
 									$counter++;
-							endforeach; 
-						endif; ?><span class="notices"><?php echo $counter; ?></span></div>
+							endforeach;
+						endif;
+						?>
+						<span class="notices"><?php echo $counter; ?></span></div>
 							<?php bp_nav_menu( array( 'container_id' => 'profile-menu' ) ); ?>
 					</li>
 			</ul> <!-- profile-news-list -->
@@ -50,16 +65,17 @@ global $current_user;
 							<h2 class="user-fullname"><?php bp_displayed_user_fullname(); ?></h2>
 						<?php endif; ?>
 							<?php
-							 if ( bp_displayed_user_id() === $current_user->ID && !empty( pmpro_affiliates_getAffiliatesForUser( $current_user->ID )[0]->code ) ) :
-							 $url = get_site_url();
-							 $code = ( !empty( pmpro_affiliates_getAffiliatesForUser( $current_user->ID )[0]->code ) ) ? pmpro_affiliates_getAffiliatesForUser( $current_user->ID )[0]->code: '';
-							 $sub_id = ( !empty( pmpro_affiliates_getAffiliatesForUser( $current_user->ID )[0]->trackingcode ) ) ? '&subid=' . pmpro_affiliates_getAffiliatesForUser( $current_user->ID )[0]->trackingcode: ''; ?>
+							if ( bp_displayed_user_id() === $current_user->ID && ! empty( pmpro_affiliates_getAffiliatesForUser( $current_user->ID )[0]->code ) ) :
+								$url    = get_site_url();
+								$code   = ( ! empty( pmpro_affiliates_getAffiliatesForUser( $current_user->ID )[0]->code ) ) ? pmpro_affiliates_getAffiliatesForUser( $current_user->ID )[0]->code : '';
+								$sub_id = ( ! empty( pmpro_affiliates_getAffiliatesForUser( $current_user->ID )[0]->trackingcode ) ) ? '&subid=' . pmpro_affiliates_getAffiliatesForUser( $current_user->ID )[0]->trackingcode : '';
+								?>
 							<div class="affiliate-link-tab member-header-actions action">
 								<h2 class="affiliate-title">Your Affiliate Link</h2>
 								<div class="affiliate-link">
 									<a class="affiliate-copy-link"><?php _e( "$url/membership-levels/?pa=$code$sub_id", 'x' ); ?></a>
 								</div>
-								<div class="affiliate-copy-btn-wrap generic-button"><a class="x-btn x-btn-large x-btn-block" data-toggle="tooltip" data-placement="top" title="Click to copy affiliate link">Copy Link <?php echo do_shortcode('[x_icon type="copy"]'); ?></a></div>
+								<div class="affiliate-copy-btn-wrap generic-button"><a class="x-btn x-btn-large x-btn-block" data-toggle="tooltip" data-placement="top" title="Click to copy affiliate link">Copy Link <?php echo do_shortcode( '[x_icon type="copy"]' ); ?></a></div>
 							</div>
 						<?php endif; ?>
 						<?php
@@ -69,10 +85,12 @@ global $current_user;
 								'button_element'    => 'a',
 								'container_classes' => array( 'member-header-actions' ),
 							)
-						); ?>
+						);
+						?>
 
-						<?php 
-						if ( bp_displayed_user_id() === $current_user->ID ) : ?>
+						<?php
+						if ( bp_displayed_user_id() === $current_user->ID ) :
+							?>
 							<div class="vr-room-form-btn member-header-actions action">
 								<div class="generic-button">
 									<a>Launch Virtual Networking</a>
@@ -85,7 +103,7 @@ global $current_user;
 
 					</div><!-- #item-header-content -->
 				</li>
-				<?php if ( !empty( bp_get_profile_field_data( array( 'field' => 'Bio' ) ) ) ) : ?>
+				<?php if ( ! empty( bp_get_profile_field_data( array( 'field' => 'Bio' ) ) ) ) : ?>
 				<li class="profile-bio-item">
 					<i class="fa fa-user-o" aria-hidden="true"></i>
 					<div class="member-description">
@@ -95,16 +113,16 @@ global $current_user;
 					</div><!-- .member-description -->
 				</li> <!-- profile-bio-item -->
 				<?php endif; ?>
-				<?php if ( !empty( bp_get_profile_field_data( array( 'field' => 'field_2' ) ) ) || !empty( bp_get_profile_field_data( array( 'field' => 'field_3' ) ) ) ) : ?>
+				<?php if ( ! empty( bp_get_profile_field_data( array( 'field' => 'field_2' ) ) ) || ! empty( bp_get_profile_field_data( array( 'field' => 'field_3' ) ) ) ) : ?>
 					<li class="contact contact-phone">
 						<i class="fa fa-phone" aria-hidden="true"></i>
 						<div class="contact-phone-wrap">
-						<?php if ( !empty( bp_get_profile_field_data( array( 'field' => 'field_2' ) ) ) ) : ?>
+						<?php if ( ! empty( bp_get_profile_field_data( array( 'field' => 'field_2' ) ) ) ) : ?>
 						<div class="mobile-number">
 							<?php echo 'Mobile: ' . bp_get_profile_field_data( array( 'field' => 'field_2' ) ); ?>
 						</div>
 						<?php endif; ?>
-						<?php if ( !empty( bp_get_profile_field_data( array( 'field' => 'field_3' ) ) ) ) : ?>
+						<?php if ( ! empty( bp_get_profile_field_data( array( 'field' => 'field_3' ) ) ) ) : ?>
 						<div class="work-number">
 							<?php echo 'Work: ' . bp_get_profile_field_data( array( 'field' => 'field_3' ) ); ?>
 						</div>
@@ -112,16 +130,16 @@ global $current_user;
 					</div> <!-- contact-phone-wrap -->
 					</li> <!-- phone-numbers -->
 				<?php endif; ?>
-				<?php if ( !empty( bp_get_profile_field_data( array( 'field' => 'Personal Email' ) ) ) || !empty( bp_get_profile_field_data( array( 'field' => 'Work Email' ) ) ) ) : ?>
+				<?php if ( ! empty( bp_get_profile_field_data( array( 'field' => 'Personal Email' ) ) ) || ! empty( bp_get_profile_field_data( array( 'field' => 'Work Email' ) ) ) ) : ?>
 				<li class="contact contact-email">
 					<i class="fa fa-envelope-o" aria-hidden="true"></i>
 					<div class="contact-email-wrap">
-					<?php if ( !empty( bp_get_profile_field_data( array( 'field' => 'Personal Email' ) ) ) ) : ?>
+					<?php if ( ! empty( bp_get_profile_field_data( array( 'field' => 'Personal Email' ) ) ) ) : ?>
 					<div class="personal-email">
 						<?php echo 'Personal Email: ' . bp_get_profile_field_data( array( 'field' => 'Personal Email' ) ); ?>
 					</div>
 					<?php endif; ?>
-					<?php if ( !empty( bp_get_profile_field_data( array( 'field' => 'Work Email' ) ) ) ) : ?>
+					<?php if ( ! empty( bp_get_profile_field_data( array( 'field' => 'Work Email' ) ) ) ) : ?>
 					<div class="work-email">
 						<?php echo 'Work Email: ' . bp_get_profile_field_data( array( 'field' => 'Work Email' ) ); ?>
 					</div>
@@ -129,7 +147,7 @@ global $current_user;
 				</div> <!-- contact-email-wrap -->
 				</li> <!-- email-numbers -->
 				<?php endif; ?>
-				<?php if ( !empty( bp_get_profile_field_data( array( 'field' => 'Personal Interests' ) ) ) ) : ?>
+				<?php if ( ! empty( bp_get_profile_field_data( array( 'field' => 'Personal Interests' ) ) ) ) : ?>
 				<li class="contact profile-skills">
 					<i class="fa fa-info-circle" aria-hidden="true"></i>
 					<div class="profile-skills-div">
@@ -144,12 +162,24 @@ global $current_user;
 
 		</div><!-- #item-body -->
 		<?php
-		if ( bp_displayed_user_id() === $current_user->ID ) : ?>
+		if ( bp_displayed_user_id() === $current_user->ID ) :
+			?>
 			<div id="virtual-modal">
 				<div class="virtual-modal-bg">
-					<div class="virtual-modal-container">
+					<div class="row virtual-modal-container">
 						<a class="virtual-modal-close">X</a>
-						<?php echo do_shortcode('[gravityform id="9" title="true" description="true" ajax="true"]'); ?>
+						<div class="col-12"><h2 class="text-center">Welcome to Rockstar VR Area</h2></div>
+						<div class="col-6 col-conference col-create-conference text-center">
+							<h3 class="conference-title create-conference text-center">Virtual Conference</h3>
+							<button type="button" class="btn btn-light create-conference-btn"><?php esc_html_e( 'Create Conference', 'x-child' ); ?></button>
+							<?php echo do_shortcode( '[gravityform id="9" title="false" description="true" ajax="true"]' ); ?>
+						</div>
+						<div class="col-6 col-conference col-join-conference text-center">
+							<h3 class="conference-title join-conference text-center">Join Virtual Conference</h3>
+							<button type="button" class="btn btn-light join-conference-btn"><?php esc_html_e( 'Join Conference', 'x-child' ); ?></button>
+							<?php echo do_shortcode( '[gravityform id="17" title="false" description="true" ajax="true"]' ); ?>
+						</div>
+
 					</div>
 				</div>
 			</div>

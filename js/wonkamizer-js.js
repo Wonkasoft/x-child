@@ -5,6 +5,7 @@
 /*===========================================================
 =            Strict Functions that can be called            =
 ===========================================================*/
+
 	/**
 	 * This function is to adjust sizing for width and height 
 	 * This is being called in the Onload function
@@ -202,12 +203,41 @@
 	};
 /*=====  End of To run when window is resized  ======*/
 
-
 /*============================================================
 =            To run when document is fully loaded            =
 ============================================================*/
 	window.onload = function() 
 	{
+			/**
+		 * Toggles the side by side form on the virtual 
+		 * conference page(profile page and vr Conference page)
+		 *
+		 * @author Carlos 
+		 */
+		if ( document.querySelector( '.virtual-modal-container' ) )
+		{
+			var create_conference_toggle = document.querySelector( '.create-conference-btn' );
+			var join_conference_toggle = document.querySelector( '.join-conference-btn' );
+			var col_create_conference = document.querySelector( '.col-create-conference' );
+			var col_join_conference = document.querySelector( '.col-join-conference' );
+			var create_conference_gform = document.querySelector( '#gform_9' );
+			var join_conference_gform = document.querySelector( '#gform_17' );
+
+			create_conference_toggle.addEventListener( 'click', function( e )
+			{
+				col_join_conference.classList.toggle('collapse-col-join-conference');
+				col_create_conference.classList.toggle( 'col-lg-12' );
+				create_conference_gform.classList.toggle( 'expand-form' );
+			});
+
+			join_conference_toggle.addEventListener( 'click', function( e )
+			{
+				col_create_conference.classList.toggle('collapse-col-create-conference');
+				col_join_conference.classList.toggle( 'col-lg-12' );
+				join_conference_gform.classList.toggle( 'expand-form' );
+			});
+		}
+
 		/**
 		 * Fetches the eventbrite sign up from bottom 
 		 * and adds it to the top as well
@@ -236,7 +266,7 @@
 					excerpt_p_el.appendChild(readmore_div);
 				});
 				fix_event_height();
-				window.onresize = function(){ fix_event_height(); };
+				window.onresize = function(){fix_event_height();};
 		}
 	 
 		/**
@@ -252,7 +282,7 @@
 				return vars;
 		}
 		var perm = getUrlVars();
-		if ( perm.username ) {
+		if (perm.username) {
 			var shareLinkInput = document.getElementById("ShareCon");
 			var startBtn = document.getElementById("startConf");
 			var shareLink = "http://localhost/rockstar.com/join-private-conference/?meetingname=" + perm.meetingname + "&pa=" + perm.pa;
