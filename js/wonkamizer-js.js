@@ -14,47 +14,48 @@
 	 */
 	function fix_event_height() {
 		var height_adjust_timer;
+		var event_posts;
 		console.log('entered function');
 		clearTimeout(height_adjust_timer);
 		height_adjust_timer = setTimeout( function() {
 			if ( window.innerWidth < 420 ) {
-				var event_posts = document.querySelectorAll( '.iee_archive .archive-event .iee_event' );
+				event_posts = document.querySelectorAll( '.iee_archive .archive-event .iee_event' );
 				event_posts.forEach( function(el) {
 						el.style.height = '640px';
 				});
 			}
 			if ( window.innerWidth < 481 && window.innerWidth >= 420 ) {
-				var event_posts = document.querySelectorAll( '.iee_archive .archive-event .iee_event' );
+				event_posts = document.querySelectorAll( '.iee_archive .archive-event .iee_event' );
 				event_posts.forEach( function(el) {
 						el.style.height = '510px';
 				});
 			}
 			if ( window.innerWidth < 601 && window.innerWidth >= 481 ) {
-				var event_posts = document.querySelectorAll( '.iee_archive .archive-event .iee_event' );
+				event_posts = document.querySelectorAll( '.iee_archive .archive-event .iee_event' );
 				event_posts.forEach( function(el) {
 						el.style.height = '515px';
 				});
 			}
 			if ( window.innerWidth <= 768 && window.innerWidth >= 601 ) {
-				var event_posts = document.querySelectorAll( '.iee_archive .archive-event .iee_event' );
+				event_posts = document.querySelectorAll( '.iee_archive .archive-event .iee_event' );
 				event_posts.forEach( function(el) {
 						el.style.height = '470px';
 				});
 			}
 			if ( window.innerWidth <= 979 && window.innerWidth > 768 ) {
-				var event_posts = document.querySelectorAll( '.iee_archive .archive-event .iee_event' );
+				event_posts = document.querySelectorAll( '.iee_archive .archive-event .iee_event' );
 				event_posts.forEach( function(el) {
 						el.style.height = '440px';
 				});
 			}
 			if ( window.innerWidth <= 1244 && window.innerWidth > 979 ) {
-				var event_posts = document.querySelectorAll( '.iee_archive .archive-event .iee_event' );
+				event_posts = document.querySelectorAll( '.iee_archive .archive-event .iee_event' );
 				event_posts.forEach( function(el) {
 						el.style.height = '435px';
 				});
 			}
 			if ( window.innerWidth > 1244 ) {
-				var event_posts = document.querySelectorAll( '.iee_archive .archive-event .iee_event' );
+				event_posts = document.querySelectorAll( '.iee_archive .archive-event .iee_event' );
 				event_posts.forEach( function(el) {
 						el.style.height = '390px';
 				});
@@ -95,6 +96,7 @@
 	{
 		/* setting up and executing copy command */
 		var $temp = $( "<input>" );
+		var tooltip_id;
 		$( "body" ).append( $temp );
 		$temp.val($( element).text()).select();
 		document.execCommand( "copy" );
@@ -104,7 +106,7 @@
 		if ( $( 'div.affiliate-copy-btn-wrap' ).length ) 
 		{
 			 // Print copy confimation in tooltip 
-			var tooltip_id = document.querySelector( '.affiliate-copy-btn-wrap > a').getAttribute( 'aria-describedby' );
+			tooltip_id = document.querySelector( '.affiliate-copy-btn-wrap > a').getAttribute( 'aria-describedby' );
 			document.querySelector( '#' + tooltip_id + ' .tooltip-inner' ).innerText = 'Affiliate link has been copied!';
 		}
 
@@ -112,7 +114,7 @@
 		if ( $( 'a.affiliate-copy-link' ).length ) 
 		{
 			/* Print copy confimation in tooltip */
-			var tooltip_id = document.querySelector( '.affiliate-copy-btn-wrap > a').getAttribute( 'aria-describedby' );
+			tooltip_id = document.querySelector( '.affiliate-copy-btn-wrap > a').getAttribute( 'aria-describedby' );
 			document.querySelector( '#' + tooltip_id + ' .tooltip-inner' ).innerText = 'Affiliate link has been copied!';
 		}
 	}
@@ -301,11 +303,11 @@
 				return vars;
 		}
 		var perm = getUrlVars();
-		if (perm['username']) {
+		if (perm.username) {
 			var shareLinkInput = document.getElementById("ShareCon");
 			var startBtn = document.getElementById("startConf");
-			var shareLink = "http://localhost/rockstar.com/join-private-conference/?meetingname=" + perm['meetingname'] + "&pa=" + perm['pa'];
-			var startLink = "https://rockstarconference.name/demo/demoHTML5Video.jsp?username=" + perm['username'] + "&meetingname=" + perm['meetingname'] + "&record=true&allowStartStopRecording=true&action=create";
+			var shareLink = "http://localhost/rockstar.com/join-private-conference/?meetingname=" + perm.meetingname + "&pa=" + perm.pa;
+			var startLink = "https://rockstarconference.name/demo/demoHTML5Video.jsp?username=" + perm.username + "&meetingname=" + perm.meetingname + "&record=true&allowStartStopRecording=true&action=create";
 			startBtn.href=startLink;
 			shareLinkInput.value=shareLink;
 		}

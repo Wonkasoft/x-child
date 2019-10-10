@@ -28,19 +28,19 @@ require dirname( __FILE__ ) . '/class-bp-custom-whos-online-widget.php';
  * @return [array]
  */
 function custom_friendship_button( $button ) {
-	if ( $button['id'] === 'not_friends' ) :
+	if ( 'not_friends' === $button['id'] ) :
 		$button['link_text'] = 'Connect';
   endif;
 
-	if ( $button['id'] === 'is_friend' ) :
+	if ( 'is_friend' === $button['id'] ) :
 		$button['link_text'] = 'Disconnect';
   endif;
 
-	if ( $button['id'] === 'awaiting_response' ) :
+	if ( 'awaiting_response' === $button['id'] ) :
 		$button['link_text'] = 'Connection Requested';
   endif;
 
-	if ( $button['id'] === 'pending' ) :
+	if ( 'pending' === $button['id'] ) :
 		$button['link_text'] = 'Cancel Connection Request';
   endif;
 
@@ -58,7 +58,7 @@ add_filter( 'bp_get_add_friend_button', 'custom_friendship_button' );
 function filter_bp_nav_menu_items( $items ) {
 	$user_domain = bp_loggedin_user_domain();
 
-	if ( $items !== null ) {
+	if ( null !== $items ) {
 
 		foreach ( $items as $key => $item ) :
 			if ( strpos( $item->link, $user_domain ) === false ) :

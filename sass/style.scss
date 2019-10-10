@@ -1262,6 +1262,10 @@ body, #buddypress {
 									position: relative;
 									grid-area: 1/1/2/3;
 
+									h2 {
+										margin: 15px auto;
+									}
+
 									.virtual-modal-close {
 										position: absolute;
 										display: flex;
@@ -1288,7 +1292,13 @@ body, #buddypress {
 									align-self: center;
 
 									.conference-title {
-										margin: .2em 0;
+										padding: 15px;
+									}
+
+									.generic-button {
+										margin: auto;
+										padding: 8px;
+										box-shadow: none;
 									}
 
 									#create-conference-form-wraper,

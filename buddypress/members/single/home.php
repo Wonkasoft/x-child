@@ -13,6 +13,7 @@ global $current_user;
 	<div id="item-header" role="complementary" data-bp-item-id="<?php echo esc_attr( bp_displayed_user_id() ); ?>" data-bp-item-component="members" class="users-header single-headers">
 		<div id="red-bar-after-header"></div>
 		<?php bp_nouveau_member_header_template_part(); ?>
+		
 
 	</div><!-- #item-header -->
 
@@ -169,21 +170,25 @@ global $current_user;
 						<div class="virtual-modal-title"><h2 class="text-center">Welcome to Rockstar VR Area</h2><a class="virtual-modal-close">X</a></div>
 						<div class="col-conference col-create-conference text-center">
 							<h3 class="conference-title create-conference text-center">Virtual Conference</h3>
+
 							<div class="generic-button">
 								<a type="button" class="create-conference-btn"><?php esc_html_e( 'Create Conference', 'x-child' ); ?></a>
 							</div>
 							<div id="create-conference-form-wraper">
 								<?php echo do_shortcode( '[gravityform id="9" title="false" description="true" ajax="true"]' ); ?>
 							</div>
+
 						</div>
 						<div class="col-conference col-join-conference text-center">
 							<h3 class="conference-title join-conference text-center">Join Virtual Conference</h3>
+
 							<div class="generic-button">
 								<a type="button" class="join-conference-btn"><?php esc_html_e( 'Join Conference', 'x-child' ); ?></a>
 							</div>
 							<div id="join-conference-form-wraper">
 								<?php echo do_shortcode( '[gravityform id="17" title="false" description="true" ajax="true"]' ); ?>
 							</div>
+
 						</div>
 
 					</div>
