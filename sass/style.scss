@@ -1194,6 +1194,10 @@ body, #buddypress {
 				    		@include prefix( transition, all .1s ease-in-out, o moz webkit);
 
 							.virtual-modal-container {
+								display: grid;
+								grid-template-columns: 1fr 1fr;
+								grid-template-rows: 85px auto;
+								grid-gap: 15px;
 								position: relative;
 								border-radius: 15px;
 								background: #eeeeee;
@@ -1202,38 +1206,89 @@ body, #buddypress {
 								height: 85%;
 								overflow: hidden;
 
-								h4.conference-title {
-									margin: 0;
-								}
+								div.virtual-modal-title {
+									position: relative;
+									grid-area: 1/1/2/3;
 
-								.virtual-modal-close {
-									position: absolute;
-									display: flex;
-									align-items: center;
-									justify-content: center;
-									top: 25px;
-									right: 25px;
-									width: 22px;
-									height: 22px;
-									border: 2px solid #222222;
-									border-radius: 50%;
-									font-size: 18px;
-									line-height: 1;
-									font-weight: 700;
-									z-index: 999;
-									cursor: pointer;
-								}
-								div.col-conference {
-									transition: all .35s ease-in-out;
-
-									&.collapse-col-join-conference {
-										display: block;
-										margin: 0 -50% 0 0;
+									h2 {
+										margin: 15px auto;
 									}
 
-									&.collapse-col-create-conference {
+									.virtual-modal-close {
+										position: absolute;
+										display: flex;
+										align-items: center;
+										justify-content: center;
+										top: 25px;
+										right: 25px;
+										width: 22px;
+										height: 22px;
+										border: 2px solid #222222;
+										border-radius: 50%;
+										font-size: 18px;
+										line-height: 1;
+										font-weight: 700;
+										z-index: 999;
+										cursor: pointer;
+									}
+								}
+
+								div.col-conference {
+									transition: all .35s ease-in-out;
+									display: inline-block;
+									overflow: hidden;
+									align-self: center;
+
+									.conference-title {
+										padding: 15px;
+									}
+
+									.generic-button {
+										margin: auto;
+										padding: 8px;
+										box-shadow: none;
+									}
+
+									#create-conference-form-wraper,
+									#join-conference-form-wraper {
+										height: 0;
+										overflow: hidden;
+
+										&.expand-conference-form-wraper {
+											height: 100%;
+										}
+									}
+
+
+
+									&.col-create-conference {
+										grid-area: 2/1/3/2;
 										display: block;
-										margin: 0 0 0 -50%;
+										
+									}
+									
+									&.col-join-conference {
+										grid-area: 2/2/3/3;
+										display: block;
+										
+									}
+
+									&.expand-col-create-conference {
+										display: block;
+										grid-area: 2/1/3/3;
+									}	
+
+									&.collapse-col-join-conference {
+
+									}
+
+									&.expand-col-join-conference {
+										display: block;
+										grid-area: 2/1/3/3;
+									}
+
+									&.collapse-col-conference {
+										width: 0;
 									}
 								}
 
@@ -1246,15 +1301,8 @@ body, #buddypress {
 									padding: 25px;
 									overflow-y: auto;
 
-									form {
-										height: 0;
-										overflow: hidden;
-										
-										&.expand-form {
-											height: 100%;
-										}
-									}
-									form#gform_9 {
+									form#gform_9,
+									form#gform_17 {
 										width: 85%;
 										text-align: center;
 

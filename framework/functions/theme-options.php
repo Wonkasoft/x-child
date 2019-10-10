@@ -1954,7 +1954,7 @@ function x_theme_options_register() {
 		'x-buddypress'        => array(
 			'title'       => __( 'BuddyPress', '__x__' ),
 			'description' => __( 'This section handles all options regarding your BuddyPress setup. Select your content layout, section titles, along with plenty of other options to get BuddyPress up and running. The "Layout" option allows you to keep your sidebar if you have already selected "Content Left, Sidebar Right" or "Sidebar Left, Content Right" for your "Content Layout" option, or remove the sidebar completely if desired.', '__x__' ),
-			'enabled'     => false,
+			'enabled'     => X_BUDDYPRESS_IS_ACTIVE,
 			'controls'    => array(
 				'x_buddypress_layout_content' => array(
 					'type'    => 'select',
