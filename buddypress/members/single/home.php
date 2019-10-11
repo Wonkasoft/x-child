@@ -93,7 +93,7 @@ global $current_user;
 							?>
 							<div class="vr-room-form-btn member-header-actions action">
 								<div class="generic-button">
-									<a>Launch Virtual Networking</a>
+									<a>Virtual Networking</a>
 								</div>
 							</div>
 						<?php endif; ?>
@@ -165,7 +165,6 @@ global $current_user;
 		if ( bp_displayed_user_id() === $current_user->ID ) :
 			?>
 			<div id="virtual-modal">
-				<div class="virtual-modal-bg">
 					<div class="virtual-modal-container">
 						<div class="virtual-modal-title"><h2 class="text-center">Welcome to Rockstar VR Area</h2><a class="virtual-modal-close">X</a></div>
 						<div class="col-conference col-create-conference text-center">
@@ -192,7 +191,6 @@ global $current_user;
 						</div>
 
 					</div>
-				</div>
 			</div>
 		<?php endif; ?>
 

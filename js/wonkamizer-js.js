@@ -216,8 +216,11 @@
 		 */
 		if ( document.querySelector( '.virtual-modal-container' ) )
 		{
+			var conference_bg = document.createElement( 'DIV' );
+			conference_bg.classList.add( 'virtual-modal-bg' );
+			document.querySelector( '#virtual-modal' ).appendChild( conference_bg );
 			var conference_container = document.querySelector( '.virtual-modal-container' );
-			var  modal_title= document.querySelector( '.virtual-modal-title' );
+			var modal_title = document.querySelector( '.virtual-modal-title' );
 			var create_conference_toggle = document.querySelector( '.create-conference-btn' );
 			var join_conference_toggle = document.querySelector( '.join-conference-btn' );
 			var col_create_conference = document.querySelector( '.col-create-conference' );
@@ -225,17 +228,30 @@
 			var create_conference_form_wrap = document.querySelector( '#create-conference-form-wraper' );
 			var join_conference_form_wrap = document.querySelector( '#join-conference-form-wraper' );
 
+			conference_bg.addEventListener( 'click', function( e )
+			{
+				$( 'a.virtual-modal-close' ).click();
+			});
+
 			create_conference_toggle.addEventListener( 'click', function( e )
 			{
-				console.log(create_conference_toggle);
-				conference_container.classList.toggle('expand-col-create-conference');
-				// conference_container.classList.toggle('collapse-modal-title');
-				// conference_container.classList.toggle('vi');
-				col_create_conference.classList.toggle('expand-col-create-conference');
-				col_join_conference.classList.toggle('collapse-col-conference');
+				if ( col_join_conference.classList.contains( 'collapse-col-conference' ) ) 
+				{
+					setTimeout( function() {
+						conference_container.classList.toggle('expand-col-conference-container');
+						col_create_conference.classList.toggle('expand-col-conference');
+						col_join_conference.classList.toggle( 'collapse-col-conference' );
+					}, 800 );
+				}
+				else
+				{
+					conference_container.classList.toggle('expand-col-conference-container');
+					col_create_conference.classList.toggle('expand-col-conference');
+					col_join_conference.classList.toggle('collapse-col-conference');
+				}
 				create_conference_form_wrap.classList.toggle('expand-conference-form-wraper');
 
-				if (create_conference_toggle.innerHTML === "Create Conference") {
+				if ( create_conference_toggle.innerHTML === "Create Conference" ) {
 					create_conference_toggle.innerHTML = "Back to VR Area";
 				} else {
 					create_conference_toggle.innerHTML = "Create Conference";
@@ -244,14 +260,25 @@
 
 			join_conference_toggle.addEventListener( 'click', function( e )
 			{
-				conference_container.classList.toggle('expand-col-join-conference');
-				// conference_container.classList.toggle('collapse-modal-title');
-				// conference_container.classList.toggle('vi');
-				col_join_conference.classList.toggle('expand-col-join-conference');
-				col_create_conference.classList.toggle('collapse-col-conference');
-				join_conference_form_wrap.classList.toggle('expand-conference-form-wraper');
+				if ( col_create_conference.classList.contains( 'collapse-col-conference' ) ) 
+				{
+					setTimeout( function() {
+						conference_container.classList.toggle('expand-col-conference-container');	
+						col_join_conference.classList.toggle('expand-col-conference');	
+						col_create_conference.classList.toggle('collapse-col-conference');	
+						join_conference_form_wrap.classList.toggle('expand-conference-form-wraper');
+					}, 800 );
 
-				if (join_conference_toggle.innerHTML === "Join Conference") {
+				}
+				else
+				{
+					conference_container.classList.toggle('expand-col-conference-container');	
+					col_join_conference.classList.toggle('expand-col-conference');	
+					col_create_conference.classList.toggle('collapse-col-conference');	
+					join_conference_form_wrap.classList.toggle('expand-conference-form-wraper');	
+				}
+
+				if ( join_conference_toggle.innerHTML === "Join Conference" ) {
 					join_conference_toggle.innerHTML = "Back to VR Area";
 				} else {
 					join_conference_toggle.innerHTML = "Join Conference";
@@ -356,7 +383,7 @@
 				$( '#virtual-modal' ).css({ 'left': '0', 'right': '0', 'opacity': '1'});
 				$( '#virtual-modal' ).css({ 'left': '0', 'right': '0'});
 				$( '#virtual-modal' ).delay( 800 ).css({ 'opacity': '1'});
-				$( '.virtual-modal-bg' ).css({ 'background': 'rgba( 0, 0, 0, .97 )'});
+				$( '.virtual-modal-bg' ).css({ 'width': '100%', 'background': 'rgba( 0, 0, 0, .97 )'});
 			});
 
 			/* setting click event for vr room modal close */
@@ -366,6 +393,10 @@
 				$( '.virtual-modal-bg' ).removeAttr( 'style' );
 				$( '#virtual-modal' ).css({ 'opacity': '0'});
 				$( '#virtual-modal' ).delay( 800 ).css({ 'left': '-15px', 'right': '102%'});
+				if ( $( '.expand-col-conference a').length ) 
+				{
+					$( '.expand-col-conference a')[0].click();
+				}
 			});
 
 		}
