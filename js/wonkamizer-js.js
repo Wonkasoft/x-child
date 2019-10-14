@@ -241,12 +241,15 @@
 						conference_container.classList.toggle('expand-col-conference-container');
 						col_create_conference.classList.toggle('expand-col-conference');
 						col_join_conference.classList.toggle( 'collapse-col-conference' );
-					}, 800 );
+					}, 500 );
 				}
 				else
 				{
 					conference_container.classList.toggle('expand-col-conference-container');
-					col_create_conference.classList.toggle('expand-col-conference');
+					setTimeout( function() {
+						col_create_conference.classList.toggle('expand-col-conference');	
+					}, 225 );	
+					// col_create_conference.classList.toggle('expand-col-conference');
 					col_join_conference.classList.toggle('collapse-col-conference');
 				}
 				create_conference_form_wrap.classList.toggle('expand-conference-form-wraper');
@@ -267,15 +270,18 @@
 						col_join_conference.classList.toggle('expand-col-conference');	
 						col_create_conference.classList.toggle('collapse-col-conference');	
 						join_conference_form_wrap.classList.toggle('expand-conference-form-wraper');
-					}, 800 );
+					}, 500 );
 
 				}
 				else
 				{
-					conference_container.classList.toggle('expand-col-conference-container');	
-					col_join_conference.classList.toggle('expand-col-conference');	
-					col_create_conference.classList.toggle('collapse-col-conference');	
-					join_conference_form_wrap.classList.toggle('expand-conference-form-wraper');	
+					
+						conference_container.classList.toggle('expand-col-conference-container');
+						setTimeout( function() {
+						col_join_conference.classList.toggle('expand-col-conference');	
+						}, 225 );	
+						col_create_conference.classList.toggle('collapse-col-conference');	
+						join_conference_form_wrap.classList.toggle('expand-conference-form-wraper');
 				}
 
 				if ( join_conference_toggle.innerHTML === "Join Conference" ) {
