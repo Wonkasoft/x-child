@@ -168,7 +168,7 @@ global $current_user;
 					<div class="virtual-modal-container">
 						<div class="virtual-modal-title"><h2 class="text-center">Welcome to Rockstar VR Area</h2><a class="virtual-modal-close">X</a></div>
 						<div class="col-conference col-create-conference text-center">
-							<h3 class="conference-title create-conference text-center">Virtual Conference</h3>
+							<h4 class="conference-title create-conference text-center">Virtual Conference</h4>
 
 							<div class="generic-button">
 								<a type="button" class="create-conference-btn"><?php esc_html_e( 'Create Conference', 'x-child' ); ?></a>
@@ -179,7 +179,7 @@ global $current_user;
 
 						</div>
 						<div class="col-conference col-join-conference text-center">
-							<h3 class="conference-title join-conference text-center">Join Virtual Conference</h3>
+							<h4 class="conference-title join-conference text-center">Join Virtual Conference</h4>
 
 							<div class="generic-button">
 								<a type="button" class="join-conference-btn"><?php esc_html_e( 'Join Conference', 'x-child' ); ?></a>
