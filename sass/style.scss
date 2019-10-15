@@ -1284,7 +1284,7 @@ body, #buddypress {
 								#join-conference-form-wraper {
 									height: 0;
 									overflow: hidden;
-									@include prefix( transition, all .3s ease-in-out, o moz webkit);
+									@include prefix( transition, all .3s ease-in-out, o moz webkit );
 
 									.gform_wrapper {
 										display: flex;

@@ -174,7 +174,7 @@ global $current_user;
 								<a type="button" class="create-conference-btn"><?php esc_html_e( 'Create Conference', 'x-child' ); ?></a>
 							</div>
 							<div id="create-conference-form-wraper">
-								<?php echo do_shortcode( '[gravityform id="9" title="false" description="true" ajax="true"]' ); ?>
+								<?php echo gravity_form( 'Virtual Conference', false, false, false, null, true, 0, false ); ?>
 							</div>
 
 						</div>
@@ -185,7 +185,7 @@ global $current_user;
 								<a type="button" class="join-conference-btn"><?php esc_html_e( 'Join Conference', 'x-child' ); ?></a>
 							</div>
 							<div id="join-conference-form-wraper">
-								<?php echo do_shortcode( '[gravityform id="17" title="false" description="true" ajax="true"]' ); ?>
+								<?php echo gravity_form( 'Join Conference', false, false, false, null, true, 0, false ); ?>
 							</div>
 
 						</div>
