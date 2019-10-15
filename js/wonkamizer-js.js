@@ -237,22 +237,39 @@
 			{
 				if ( col_join_conference.classList.contains( 'collapse-col-conference' ) ) 
 				{
+					col_create_conference.classList.toggle('expand-top');
+					col_create_conference.classList.toggle('expand-col-conference');
+					create_conference_form_wrap.classList.toggle('expand-conference-form-wraper');
 					setTimeout( function() {
-						conference_container.classList.toggle('expand-col-conference-container');
-						col_create_conference.classList.toggle('expand-col-conference');
-						col_join_conference.classList.toggle( 'collapse-col-conference' );
-					}, 500 );
+						col_create_conference.classList.toggle('return-top');
+						setTimeout( function() {
+							col_create_conference.classList.toggle('return-right');
+							setTimeout( function() {
+								col_create_conference.classList.toggle('expand-top');
+								col_create_conference.classList.toggle('return-top');
+								col_create_conference.classList.toggle('return-right');
+								conference_container.classList.toggle('expand-col-conference-container');
+								col_join_conference.classList.toggle( 'collapse-col-conference' );
+							}, 500 );
+						}, 500 );
+					}, 200 );
 				}
 				else
 				{
+					col_join_conference.classList.toggle('collapse-col-conference');
+					col_create_conference.classList.toggle('expand-right');	
 					conference_container.classList.toggle('expand-col-conference-container');
 					setTimeout( function() {
-						col_create_conference.classList.toggle('expand-col-conference');	
-					}, 225 );	
+						col_create_conference.classList.toggle('expand-top');
+						setTimeout( function() {
+							col_create_conference.classList.toggle('expand-right');	
+							col_create_conference.classList.toggle('expand-top');	
+							col_create_conference.classList.toggle('expand-col-conference');
+							create_conference_form_wrap.classList.toggle('expand-conference-form-wraper');
+						}, 500 );
+					}, 500 );
 					// col_create_conference.classList.toggle('expand-col-conference');
-					col_join_conference.classList.toggle('collapse-col-conference');
 				}
-				create_conference_form_wrap.classList.toggle('expand-conference-form-wraper');
 
 				if ( create_conference_toggle.innerHTML === "Create Conference" ) {
 					create_conference_toggle.innerHTML = "Back to VR Area";
@@ -267,8 +284,8 @@
 				{
 					col_join_conference.classList.toggle('expand-top');	
 					col_join_conference.classList.toggle('expand-col-conference');	
+					join_conference_form_wrap.classList.toggle('expand-conference-form-wraper');
 					setTimeout( function() {
-
 						col_join_conference.classList.toggle('return-top');	
 						setTimeout( function() {
 							col_join_conference.classList.toggle('return-left');	
@@ -278,7 +295,6 @@
 								col_join_conference.classList.toggle('return-left');	
 								conference_container.classList.toggle('expand-col-conference-container');
 								col_create_conference.classList.toggle('collapse-col-conference');	
-								join_conference_form_wrap.classList.toggle('expand-conference-form-wraper');
 							}, 500 );
 						}, 500 );
 					}, 200 );
@@ -288,7 +304,6 @@
 				{
 
 					col_create_conference.classList.toggle('collapse-col-conference');	
-					join_conference_form_wrap.classList.toggle('expand-conference-form-wraper');	
 					col_join_conference.classList.toggle('expand-left');	
 					conference_container.classList.toggle('expand-col-conference-container');
 					setTimeout( function() {
@@ -297,6 +312,7 @@
 							col_join_conference.classList.toggle('expand-left');	
 							col_join_conference.classList.toggle('expand-top');	
 							col_join_conference.classList.toggle('expand-col-conference');	
+							join_conference_form_wrap.classList.toggle('expand-conference-form-wraper');
 						}, 500 );
 					}, 500 );
 

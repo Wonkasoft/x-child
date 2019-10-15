@@ -1268,6 +1268,7 @@ body, #buddypress {
 								top: 0;
 								left: 0;
 								right: 0;
+								width: 100%;
 
 								.conference-title {
 									margin: 0;
@@ -1283,7 +1284,7 @@ body, #buddypress {
 								#create-conference-form-wraper,
 								#join-conference-form-wraper {
 									height: 0;
-									overflow: hidden;
+									overflow-y: auto;
 									@include prefix( transition, all .3s ease-in-out, o moz webkit );
 
 									.gform_wrapper {
@@ -1314,7 +1315,6 @@ body, #buddypress {
 
 									&.expand-conference-form-wraper {
 										height: 100%;
-										@include prefix( transition, all .3s ease-in-out, o moz webkit);
 
 										form#gform_9,
 										form#gform_17 {
@@ -1335,6 +1335,8 @@ body, #buddypress {
 									}
 
 									&.expand-right {
+										width: 200%;
+										@include prefix( transition, all .3s ease-in-out, o moz webkit);
 
 										&.expand-top {
 											top: -54%;
@@ -1343,7 +1345,6 @@ body, #buddypress {
 
 									&.expand-top {
 										top: -54%;
-										left: 100%;
 										width: 200%;
 										
 										&.return-top {
