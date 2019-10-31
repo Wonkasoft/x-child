@@ -421,6 +421,7 @@
 			/* setting click event for vr room modal */
 			$( '.vr-room-form-btn a' ).click( function() 
 			{
+				$( '.virtual-modal-container' ).addClass( 'expanded-container' );
 				$( '#virtual-modal' ).css({ 'left': '0', 'right': '0', 'opacity': '1'});
 				$( '#virtual-modal' ).css({ 'left': '0', 'right': '0'});
 				$( '#virtual-modal' ).delay( 800 ).css({ 'opacity': '1'});
@@ -430,6 +431,7 @@
 			/* setting click event for vr room modal close */
 			$( 'a.virtual-modal-close' ).click( function() 
 			{
+				$( '.virtual-modal-container' ).removeClass( 'expanded-container' );
 				$( '#virtual-modal' ).css({ 'left': '-15px', 'right': '102%', 'opacity': '0'});
 				$( '.virtual-modal-bg' ).removeAttr( 'style' );
 				$( '#virtual-modal' ).css({ 'opacity': '0'});
@@ -470,6 +472,10 @@
 		{
 			/* call function for adjusting elements on welcome page */
 			adjust_welcome_page();
+		}
+
+		if ( document.querySelector( 'select[multiple="multiple"]' ) ) {
+			$( 'select[multiple="multiple"]' ).select2();
 		}
 
 		/* checking for welcome page elements */

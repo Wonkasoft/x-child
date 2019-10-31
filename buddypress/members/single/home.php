@@ -73,7 +73,7 @@ global $current_user;
 							<div class="affiliate-link-tab member-header-actions action">
 								<h2 class="affiliate-title">Your Affiliate Link</h2>
 								<div class="affiliate-link">
-									<a class="affiliate-copy-link"><?php _e( "$url/membership-levels/?pa=$code$sub_id", 'x' ); ?></a>
+									<a class="affiliate-copy-link" data-toggle="tooltip" data-placement="top" title="<?php echo esc_url( "$url/membership-levels/?pa=$code$sub_id", 'x' ); ?>"><?php echo esc_url( "$url/membership-levels/?pa=$code$sub_id", 'x' ); ?></a>
 								</div>
 								<div class="affiliate-copy-btn-wrap generic-button"><a class="x-btn x-btn-large x-btn-block" data-toggle="tooltip" data-placement="top" title="Click to copy affiliate link">Copy Link <?php echo do_shortcode( '[x_icon type="copy"]' ); ?></a></div>
 							</div>

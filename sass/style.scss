@@ -144,8 +144,7 @@ div.tooltip {
 	.activity-content {
 
 		div.generic-button {
-		margin: 0 15px 10px 0;
-		@include prefix( box-shadow, 0 1px 6px 0 rgba(#000, .4 ), o moz webkit);
+		margin: auto;
 
 		a {
 			color: #ffffff;
@@ -179,8 +178,8 @@ div.tooltip {
 #buddypress {
 
 	div.generic-button {
-		margin: 0 15px 10px 0;
-		@include prefix( box-shadow, 0 1px 6px 0 rgba(#000, .4 ), o moz webkit);
+		margin: auto;
+		padding: 8px;
 
 		a {
 			color: #ffffff;
@@ -416,11 +415,15 @@ div.tooltip {
 
 	.widget_bp_groups_widget {
 
-		.item-list {
+		#groups-list {
 
-			.bp-single-group {
-			    background: #eee;
-			    @include prefix( box-shadow, 0 1px 6px 0 rgba(#000, .6 ), o moz webkit);
+			&.item-list {
+
+				.bp-single-group {
+				    background: #eee;
+				    width: 100%;
+				    @include prefix( box-shadow, 0 1px 3px 1px rgba(0,0,0,0.3), o moz webkit);
+				}
 			}
 		}
 	}
@@ -766,6 +769,12 @@ body, #buddypress {
 	}
 }
 
+.directory.members {
+
+	.entry-wrap {
+		padding: 30px 15px;
+	}
+}
 
 /*=====  End of Styles for Suggested Members Widget  ======*/
 
@@ -793,9 +802,14 @@ body, #buddypress {
 
 			.entry-wrap {
 
+				.entry-content {
+					margin: 0;
+				}
+
 				#item-header {
 					border: none;
 					padding: 0;
+					margin: 0;
 
 					div {
 						border-radius: 0;
@@ -1037,7 +1051,6 @@ body, #buddypress {
 
 							.generic-button {
 								margin-top: 8px;
-								@include prefix( box-shadow, 0 1px 6px 0 rgba(#000, .4 ), o moz webkit);
 
 								a {
 									color: #ffffff;
@@ -1126,7 +1139,7 @@ body, #buddypress {
 										li.vcard {
 											width: 100%;
 											background: #eee;
-											@include prefix( box-shadow, 0 1px 6px 0 rgba(#000, .4 ), o moz webkit);
+											@include prefix( box-shadow, 0 1px 2px 1px rgba(0,0,0,0.4), o moz webkit);
 										}
 									}
 								}
@@ -1188,8 +1201,7 @@ body, #buddypress {
 						opacity: 0;
 						overflow: hidden;
 						z-index: 1050;
-				    	@include prefix( transition, all .3s ease-in-out, o moz webkit);
-
+				    	@include prefix( transition, all .6s ease-in-out, o moz webkit);
 
 						.virtual-modal-container {
 							display: grid;
@@ -1200,12 +1212,16 @@ body, #buddypress {
 							border-radius: 15px;
 							background: #eeeeee;
 							color: #333333;
-							width: 100%;
+							width: 0;
 							height: 50%;
 							min-height: 50%;
 							overflow: hidden;
 							z-index: 1055;
-							@include prefix( transition, all .3s ease-in-out, o moz webkit);
+							@include prefix( transition, all .15s ease-in-out, o moz webkit);
+
+							&.expanded-container {
+								width: 100%;
+							}
 
 							.virtual-modal-title {
 
@@ -1287,7 +1303,7 @@ body, #buddypress {
 								#join-conference-form-wraper {
 									height: 0;
 									overflow-y: auto;
-									@include prefix( transition, all .3s ease-in-out, o moz webkit );
+									@include prefix( transition, all .4s ease-in-out, o moz webkit );
 
 									.gform_wrapper {
 										display: flex;
@@ -1300,9 +1316,10 @@ body, #buddypress {
 
 										form {
 											width: 0%;
+											height: 0%;
 											padding: 15px;
 											text-align: center;
-											@include prefix( transition, all .3s ease-in-out, o moz webkit);
+											@include prefix( transition, all .4s ease-in-out, o moz webkit);
 
 											li {
 												padding: 0;
@@ -1324,6 +1341,7 @@ body, #buddypress {
 
 										form {
 											width: 100%;
+											height: 100%;
 										}
 
 									}
@@ -1341,7 +1359,7 @@ body, #buddypress {
 
 									&.expand-right {
 										width: 200%;
-										@include prefix( transition, all .3s ease-in-out, o moz webkit);
+										@include prefix( transition, all .4s ease-in-out, o moz webkit);
 
 										&.expand-top {
 											top: -54%;
@@ -1354,7 +1372,7 @@ body, #buddypress {
 										
 										&.return-top {
 											top: 0;
-											@include prefix( transition, all .3s ease-in-out, o moz webkit);
+											@include prefix( transition, all .4s ease-in-out, o moz webkit);
 
 											&.return-right {
 												left: 0;
@@ -1381,7 +1399,7 @@ body, #buddypress {
 										top: 0;
 										left: -100%;
 										width: 200%;
-										@include prefix( transition, all .3s ease-in-out, o moz webkit);
+										@include prefix( transition, all .4s ease-in-out, o moz webkit);
 										
 										&.expand-top {
 											top: -54%;
@@ -1395,7 +1413,7 @@ body, #buddypress {
 										
 										&.return-top {
 											top: 0;
-											@include prefix( transition, all .3s ease-in-out, o moz webkit);
+											@include prefix( transition, all .4s ease-in-out, o moz webkit);
 
 											&.return-left {
 												left: 0;
@@ -1428,6 +1446,57 @@ body, #buddypress {
 					}
 				}
 			}
+		}
+	}
+}
+
+#profile-edit-form {
+
+	.button-nav {
+		position: relative;
+
+		&:after {
+			content: "";
+			display: inline-block;
+			position: absolute;
+			left: 0;
+			bottom: 0;
+			width: 100%;
+			height: 5px;
+			@include prefix( box-shadow, 0 1px 3px 0 inset rgba( 0, 0, 0, .7 ), o moz webkit);
+		}
+
+		li {
+			position: relative;
+			margin: 0;
+			padding: 8px;
+			text-align: center;
+			border-radius: 4px;
+
+			&:not( :last-child ):after {
+				content: "|";
+				position: absolute;
+				display: inline-block;
+				right: 0;
+				font-size: 1.2rem;
+				line-height: 1.5;
+			}
+		}
+
+		a {
+			background-color: unset;
+		}
+	}
+
+	select {
+		width: 100%;
+	}
+
+	li.select2-search {
+		width: 100%;
+
+		input.select2-search__field {
+			width: 100% !important;
 		}
 	}
 }

@@ -520,3 +520,19 @@ function wonka_admin_do_wp_nav_menu_meta_box() {
 
 	<?php
 }
+
+/**
+ * This function overrides x themes default buddypress options.
+ */
+function wonkasoft_boot_mods() {
+
+	add_filter( 'bp_is_profile_cover_image_active', '__return_true' );
+	add_filter( 'bp_is_group_cover_image_active', '__return_true' );
+	remove_theme_support( 'buddypress-use-legacy' );
+	add_theme_support( 'buddypress-use-nouveau' );
+	remove_action( 'x_enqueue_styles', 'x_buddypress_enqueue_styles', 10, 2 );
+
+	add_action( 'x_enqueue_styles', 'wonkasoft_x_enqueue_styles', 10, 2 );
+
+}
+add_action( 'x_boot_preinit', 'wonkasoft_boot_mods', 900 );
